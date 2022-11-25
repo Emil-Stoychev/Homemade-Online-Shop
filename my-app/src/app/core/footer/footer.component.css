@@ -1,0 +1,25 @@
+div.footer {
+    background-color: rgba(16, 105, 189, 0.842);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 5px solid rgba(0, 0, 0, 0.534);
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
+
+div.text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 0.5rem;
+}
+
+div.text span {
+    font-size: 24px;
+    text-align: center;    
+    color: black;
+    padding: 0 1rem;
+}
