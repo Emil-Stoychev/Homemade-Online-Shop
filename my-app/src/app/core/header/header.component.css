@@ -35,6 +35,7 @@ ul li {
     transition: all 170ms ease-in-out;
     cursor: pointer;
     transform: rotate(0);
+    box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.50);
 }
 
 ul li:hover {
