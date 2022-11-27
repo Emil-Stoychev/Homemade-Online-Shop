@@ -1,16 +1,19 @@
 <div class="container">
-    <nav>
-        <ul class="left-side">
-            <li><a routerLink="">Home</a></li>
-            <li><a routerLink="catalog">Catalog</a></li>
-            <li><a routerLink="create">Create</a></li>
-            <li><a routerLink="about">About</a></li>
-        </ul>
+  <nav>
+    <ul class="left-side">
+      <li routerLink="">Home</li>
+      <li routerLink="catalog">Catalog</li>
+      <li routerLink="create">Create</li>
+      <li routerLink="about">About</li>
+    </ul>
 
-        <ul class="right-side">
-            <li><a routerLink="login">Login</a></li>
-            <li><a routerLink="register">Register</a></li>
-            <li><a routerLink="logout">Logout</a></li>
-        </ul>
-    </nav>
+    <ul class="right-side">
+      <div class="email" routerLink="profile">
+        Welcome, <span> name@gmail.com</span>!
+      </div>
+      <li routerLink="login">Login</li>
+      <li routerLink="register">Register</li>
+      <li routerLink="logout">Logout</li>
+    </ul>
+  </nav>
 </div>

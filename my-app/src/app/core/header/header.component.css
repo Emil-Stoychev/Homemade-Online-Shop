@@ -43,3 +43,27 @@ ul li:hover {
     border: 1px solid black;
     transform: rotate(-3deg) scale(1.2);
 }
+
+ul.right-side div.email {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid white;
+    padding: 0.5rem 1rem;
+    border-top-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    transition: all 170ms ease-in-out;
+    transform: rotate(0);
+    box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.50);
+}
+
+ul.right-side div.email:hover {
+    color: rgb(0, 0, 0);
+    border: 1px solid black;
+    transform: rotate(-2deg) scale(1.1);
+}
+
+ul.right-side div.email span {
+    color: rgb(243, 154, 38);
+}
