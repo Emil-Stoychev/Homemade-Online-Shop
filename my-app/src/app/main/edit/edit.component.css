@@ -1,0 +1,81 @@
+div.container {
+    height: 100vh;
+}
+
+div.container form {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin: 0 auto;
+    width: 30%;
+    background-color: rgba(16, 105, 189, 0.842);
+    padding: 1.2rem;
+    border-radius: 1rem;
+    color: white;
+    margin-top: 7%;
+    box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.75);
+}
+
+div.container form h2 {
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 600;
+    border-bottom: 3px solid black;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+div.container form .title,
+div.container form .desc,
+div.container form .category,
+div.container form .price {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    gap: 0.3rem;
+    text-align: center;
+}
+
+div.container form div label {
+    font-size: 18px;
+    letter-spacing: 1.5px;
+}
+
+div.container form div input,
+div.container form div textarea {
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    background-color: rgba(255, 255, 255, 0.815);
+    width: 65%;
+    margin: 0 auto;
+}
+
+div.container form div.file {
+    margin: 0 auto;
+}
+
+div.container form div.file input {
+    width: 100%;
+    background-color: transparent;
+}
+
+div.container form button {
+    width: 30%;
+    padding: 0.2rem 1rem;
+    font-weight: 900;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.75);
+    margin: 0 auto;
+}
+
+div.container form button:hover {
+    transform: scale(1.2);
+    background-color: green;
+    color: white;
+}
