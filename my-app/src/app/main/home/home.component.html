@@ -3,27 +3,15 @@
   <h1>Welcome to our website!</h1>
 
   <section>
-    <article>
+
+    <article *ngFor="let product of products">
       <img
-        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80"
+        src="{{product.images[0].dataString}}"
         alt="">
-      <h3>Example header</h3>
+      <h3>{{product.title}}</h3>
       <button>View</button>
     </article>
-    <article>
-      <img
-        src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80"
-        alt="">
-      <h3>Example header</h3>
-      <button>View</button>
-    </article>
-    <article>
-      <img
-        src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?cs=srgb&dl=pexels-eprism-studio-335257.jpg&fm=jpg"
-        alt="">
-      <h3>Example header</h3>
-      <button>View</button>
-    </article>
+
   </section>
 
 </div>
