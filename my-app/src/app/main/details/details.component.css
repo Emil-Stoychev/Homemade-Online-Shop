@@ -1,40 +1,44 @@
 div.container {
+    height: 100vh;
+}
+
+div.container .card {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 3rem;
     width: 60%;
     margin: 0 auto;
-    margin-top: 12rem;
+    margin-top: 14rem;
     box-shadow: 10px 10px 7px 0px rgba(0,0,0,0.75);
 }
 
-div.container div {
+div.container .card div {
     width: 50%;
 }
 
-div.container div.details {
+div.container .card div.details {
     display: flex;
     justify-content: flex-start;
     gap: 1.5rem;
     flex-direction: column;
 }
 
-div.container div.details p {
+div.container .card div.details p {
     width: 70%;
 }
 
-div.container div.details p span {
+div.container .card div.details p span {
     font-weight: 900;
     font-size: 18px;
 }
 
-div.container div.details div.btns {
+div.container .card div.details div.btns {
     display: flex;
     gap: 1rem;
 }
 
-div.container div.details div.btns button {
+div.container .card div.details div.btns button {
     padding: 0.2rem 1rem;
     font-weight: 900;
     border-radius: 1rem;
@@ -43,7 +47,7 @@ div.container div.details div.btns button {
     transition: all 200ms ease-in-out;
 }
 
-div.container div.details div.btns button:hover {
+div.container .card div.details div.btns button:hover {
     transform: scale(1.2);
     background-color: green;
     color: white;
