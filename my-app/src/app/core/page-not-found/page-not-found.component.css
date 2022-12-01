@@ -1,0 +1,12 @@
+div.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+div.container h1 {
+    font-size: 48px;
+    color: rgb(59, 55, 55);
+    text-shadow: 5px 5px 5px rgb(0 0 0 / 50%);
+}

@@ -1,9 +1,12 @@
 div.container {
     background-color: rgba(16, 105, 189, 0.842);
-    margin: 0;
     border-bottom: 5px solid rgba(0, 0, 0, 0.534);
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 nav {
