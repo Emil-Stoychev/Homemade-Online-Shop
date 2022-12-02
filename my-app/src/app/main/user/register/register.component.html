@@ -1,26 +1,41 @@
 <div class="container">
-    <form >
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
 
         <h1>Register</h1>
 
+        <h2 *ngIf="res.message">{{res?.message}}</h2>
+
         <div class="email">
             <label for="email">Email</label>
-            <input type="email" id="email" placeholder="example@gmail.com" minlength="3" >
+            <input type="email" id="email" name="email" ngModel placeholder="example@gmail.com" minlength="3" >
         </div>
 
         <div class="password">
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="******" minlength="3">
+            <input type="password" id="password" name="password" ngModel placeholder="******" minlength="3">
         </div>
 
         <div class="password">
             <label for="re-password">Re-Password</label>
-            <input type="password" id="re-password" placeholder="******" minlength="3">
+            <input type="password" id="re-password" name="rePassword" ngModel placeholder="******" minlength="3">
+        </div>
+
+        <div class="file">
+            <label for="image">Profile image</label>
+            <input type="file" id="image" name="image" ngModel (change)="addImageChangeHandler($event?.target)">
+
+            {{errors}}
+            <div class="smallImages" *ngIf="allImages?.length > 0">
+                <div class="image" *ngFor="let image of allImages">
+                    <img src="{{image?.dataString}}" alt="">
+                    <input type="button" value="X" (click)="removeImage($event.target)">
+                </div>
+            </div>
         </div>
 
         <button>Submit</button>
 
-        <p>If you already have an account, <button type="button" class="redirect-register" routerLink="login">Login Now</button></p>
+        <p>If you already have an account, <button (click)="goToLogin()" type="button" class="redirect-register" routerLink="login">Login Now</button></p>
 
     </form>
 </div>
