@@ -8,11 +8,11 @@ import { IProduct } from '../../interfaces/product';
 })
 export class DetailsProductService {
 
-  private URL: string = 'http://localhost:3030/catalog/details/:id'
+  private URL: string = 'http://localhost:3030/catalog/details/'
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.URL)
+  getProducts(id: string): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(this.URL + id)
   }
 }

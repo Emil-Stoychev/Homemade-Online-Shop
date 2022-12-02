@@ -15,6 +15,52 @@ div.container .card {
 
 div.container .card div {
     width: 50%;
+    height: 100%;
+}
+
+div.container .card div.image {
+    position: relative;
+}
+
+div.container .card div.image img {
+    padding: 5rem;
+}
+
+div.container .card div.image .sliders {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 2rem;
+    left: 0;
+    top: 0;
+}
+
+div.container .card div.image .sliders button {
+    width: 24px;
+    height: 100px;
+    border: none;
+    background-color: rgba(16, 105, 189, 0.842);
+    color: white;
+    font-weight: 900;
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+}
+
+div.container .card div.image .sliders button:hover {
+    transform: scale(1.1);
+}
+
+div.container .card div.image .sliders button:first-child {
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+
+div.container .card div.image .sliders button:last-child {
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
 }
 
 div.container .card div.details {
