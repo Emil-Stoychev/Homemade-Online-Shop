@@ -9,7 +9,7 @@
         src="{{product.images[0].dataString}}"
         alt="">
       <h3>{{product.title}}</h3>
-      <button>View</button>
+      <button (click)="onSelect(product._id)">View</button>
     </article>
 
   </section>
