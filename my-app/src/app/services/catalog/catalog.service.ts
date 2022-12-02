@@ -16,5 +16,9 @@ export class CatalogService {
     return this.http.get<IProduct[]>(this.URL)
   }
 
+  createProduct(data: object): Observable<IProduct[]> {
+    return this.http.post<IProduct[]>(this.URL + '/create', data)
+  }
+
 
 }
