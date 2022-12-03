@@ -20,4 +20,12 @@ export class UserService {
     return this.http.post<IUserRegister[]>(this.URL + 'register', userData);
   }
 
+  loggedIn() {
+    return !!localStorage.getItem('sessionStorage')
+  }
+
+  getToken() {
+    return localStorage.getItem('sessionStorage')
+  }
+
 }

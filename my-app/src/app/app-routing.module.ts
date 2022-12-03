@@ -12,16 +12,17 @@ import { LoginComponent } from './main/user/login/login.component';
 import { RegisterComponent } from './main/user/register/register.component';
 import { OwnProductsComponent } from './main/ownProducts/ownProducts.component';
 import { LikedProductsComponent } from './main/likedProducts/likedProducts.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'catalog', component: CatalogComponent },
-  { path: 'create', component: CreateComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'create', component: CreateComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'catalog/details/:id', component: DetailsComponent },
-  { path: 'catalog/edit/:id', component: EditComponent },
-  { path: 'ownProducts', component: OwnProductsComponent },
-  { path: 'likedProducts', component: LikedProductsComponent },
+  { path: 'catalog/edit/:id', component: EditComponent, canActivate: [AuthGuard] },
+  { path: 'ownProducts', component: OwnProductsComponent, canActivate: [AuthGuard] },
+  { path: 'likedProducts', component: LikedProductsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: PageNotFoundComponent },

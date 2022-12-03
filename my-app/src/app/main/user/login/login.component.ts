@@ -22,6 +22,7 @@ export class LoginComponent {
       this.res = data
 
       if(!this.res.message) {
+        localStorage.setItem('sessionStorage', this.res)
         this.router.navigate(['/catalog']);
       }
     });

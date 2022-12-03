@@ -8,7 +8,7 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent {
-  public errors: string = ''
+  public errors: any;
   public imageTypes: string[] = [
     'image/png',
     'image/jpeg',
@@ -26,18 +26,25 @@ export class CreateComponent {
   }
 
   onSubmit(createForm: any) {
+    createForm.images = this.allImages
+    createForm.cookie = {}
+    createForm.cookie.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVhOTI0NDc4MGMyZTQ0OWFiZTZmNGQiLCJlbWFpbCI6ImFzZEBhYnYuYmciLCJtb25leSI6OTEsImlhdCI6MTY3MDA2OTM3NSwiZXhwIjoxNjcwMjQyMTc1fQ.D6tqGANL-aH1w11trvjyA17C5C4wAenaqoChWLOqyn0'
+    createForm.email = 'asd@abv.bg'
+    createForm.author = '62ea9244780c2e449abe6f4d'
+    createForm.cookie._id = '62ea9244780c2e449abe6f4d'
     console.log(createForm);
 
-    // createForm.image = this.allImages[0]?.dataString || ''
-    
-    // this.catalogService.createProduct(createForm).subscribe((data) => {
-    //   // this.res = data
-    //   console.log(data);
+    this.catalogService.createProduct(createForm).subscribe((data) => {
+      this.res = data
+      console.log(data);
 
-    //   // if(!this.res.message) {
-    //   //   this.router.navigate(['/login']);
-    //   // }
-    // });
+      if(!this.res.message) {
+        this.errors = []
+        this.router.navigate(['/catalog']);
+      } else {
+        this.errors = data
+      }
+    });
   }
 
   async addImageChangeHandler(e: any) {
@@ -58,20 +65,20 @@ export class CreateComponent {
       };
       
         if (this.allImages.some((x: any) => x.dataString == imageData.dataString)) {
-            if (this.errors !== 'This image already exist!') {
-                this.errors = 'This image already exist!'
+            if (this.errors.message !== 'This image already exist!') {
+                this.errors.message = 'This image already exist!'
 
                 setTimeout(() => {
-                  this.errors = ''
+                  this.errors = []
                 }, 2000);
             }
         } else {
-            if(this.allImages.length > 0) {
-                if (this.errors !== 'You cannot upload more than 1 image!') {
-                  this.errors = 'You cannot upload more than 1 image!'
+            if(this.allImages.length > 5) {
+                if (this.errors.message !== 'You cannot upload more than 6 images!') {
+                  this.errors.message = 'You cannot upload more than 6 images!'
 
                     setTimeout(() => {
-                      this.errors = ''
+                      this.errors = []
                     }, 2000);
                 }
             } else {
@@ -79,11 +86,11 @@ export class CreateComponent {
             }
         }
     } else {
-        if (this.errors !== 'File must be a image!') {
-          this.errors = 'File must be a image!'
+        if (this.errors.message !== 'File must be a image!') {
+          this.errors.message = 'File must be a image!'
 
             setTimeout(() => {
-              this.errors = ''
+              this.errors = []
             }, 2000);
         }
     }
