@@ -1,9 +1,11 @@
 <div class="container">
 
-    <form >
+    <form #createForm="ngForm" (ngSubmit)="onSubmit(createForm.value)">
 
         <!-- <TextError message={errors} /> Some error can be visible here -->
         <h2>Create form</h2>
+
+        <h2 *ngIf="errors?.message">{{errors?.message}}</h2>
 
         <div class="title">
             <label for="title">Title</label>
@@ -16,6 +18,7 @@
                 id="title"
                 minlength="3"
                 maxlength="15"
+                ngModel
             />
         </div>
         <div class="desc">
@@ -28,6 +31,7 @@
                 id="desc"
                 minlength="3"
                 maxlength="100"
+                ngModel
             ></textarea>
         </div>
 
@@ -42,6 +46,7 @@
                 id="category"
                 minlength="3"
                 maxlength="15"
+                ngModel
             />
         </div>
         <div class="price">
@@ -53,28 +58,20 @@
                 id="price"
                 placeholder="Price in EURO"
                 min="1"
+                ngModel
             />
         </div>
 
         <div class="file">
-            <input
-                class="form-control"
-                type="file"
-            />
-        </div>
-        <div class="all-images">
-            <!-- {values.images.length > 0 && values.images.map(x =>
-                <div key={x.dataString}>
-                    <img src={x.dataString} style={{ margin: "0 1% 1% 0", width: "100px", height: "100px" }} />
-                    <input
-                        class="btn btn-primary delete"
-                        type="button"
-                        value="X"
-                        style={{ margin: "-66px 0px 0px 0px" }}
-                        onClick={(e) => removeImage(e, setValues)}
-                    />
+            <label for="image">Profile image</label>
+            <input type="file" id="image" name="images" ngModel (change)="addImageChangeHandler($event.target)">
+
+            <div class="smallImages" *ngIf="allImages?.length > 0">
+                <div class="image" *ngFor="let image of allImages">
+                    <img src="{{image?.dataString}}" alt="">
+                    <input type="button" value="X" (click)="removeImage($event.target)">
                 </div>
-            )} -->
+            </div>
         </div>
 
         <button>CREATE</button>

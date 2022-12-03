@@ -22,7 +22,7 @@
 
         <div class="file">
             <label for="image">Profile image</label>
-            <input type="file" id="image" name="image" ngModel (change)="addImageChangeHandler($event?.target)">
+            <input type="file" id="image" name="image" ngModel (change)="addImageChangeHandler($event.target)">
 
             {{errors}}
             <div class="smallImages" *ngIf="allImages?.length > 0">

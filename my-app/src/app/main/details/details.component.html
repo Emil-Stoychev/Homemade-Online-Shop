@@ -1,9 +1,9 @@
 <div class="container">
 
-  <div class="card">
+  <div class="card" *ngIf="product.title">
     <div class="image">
       <img
-        src={{product?.images[imageCount].dataString}}
+        src={{product?.images[imageCount]?.dataString}}
         alt="">
         <div class="sliders">
           <button (click)="previousImage()"><</button>

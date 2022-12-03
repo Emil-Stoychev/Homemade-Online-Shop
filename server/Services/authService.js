@@ -44,6 +44,8 @@ const addNewItemToUser = async (userId, productId, nameOfProduct, token) => {
 
         let user = await User.findOne({ _id: userId })
 
+        console.log(user);
+
         if (!user) {
             return { message: "User doesn't exist!" }
         }

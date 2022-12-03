@@ -22,7 +22,7 @@ export class DetailsComponent implements OnInit {
 
     this.detailsProduct
       .getProducts(id)
-      .subscribe((data) => (this.product = data));
+      .subscribe((data) => this.product = data);
   }
 
   nextImage = () => {

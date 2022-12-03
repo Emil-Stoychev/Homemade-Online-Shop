@@ -15,6 +15,22 @@ const authMiddleware = async(token) => {
     }
 }
 
+function authMiddlewareCheck(req, res, next) {
+    let token = req.headers.authorization
+
+    if(!token || token === '') {
+        return res.status(401).send('Unauthorized request')
+    }
+    
+    let payload = jwt.verify(token, secret)
+    if(!payload) {
+        return res.status(401).send('Unauthorized request')
+    }
+
+    next()
+}
+
 module.exports = {
-    authMiddleware
+    authMiddleware,
+    authMiddlewareCheck
 }
