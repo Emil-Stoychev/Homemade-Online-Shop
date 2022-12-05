@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class AppComponent {
   @Input() public sessionStorage: any
+  @Input() public userFromToken: any
 
 }

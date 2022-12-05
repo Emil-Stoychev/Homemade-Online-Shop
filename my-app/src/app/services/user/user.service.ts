@@ -36,10 +36,8 @@ export class UserService {
   }
 
   jwtDecode(token: string) {
-    let cookie = this.jwt.decodeToken(token);
+    let user = this.jwt.decodeToken(token);
 
-    // console.log(cookie);
-
-    return cookie;
+    return user;
   }
 }

@@ -25,6 +25,7 @@ export class LoginComponent {
       if (!this.res.message) {
         localStorage.setItem('sessionStorage', this.res);
         this.appComponent.sessionStorage = this.userService.getToken()
+        this.appComponent.userFromToken = this.userService.jwtDecode(localStorage.getItem('sessionStorage') as string)
 
         this.router.navigate(['/catalog']);
       }
