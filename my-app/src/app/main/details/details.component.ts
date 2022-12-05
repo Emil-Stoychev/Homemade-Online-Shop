@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { CatalogService } from 'src/app/services/catalog/catalog.service';
 import { DetailsProductService } from 'src/app/services/catalog/details/detailsProduct.service';
 
 @Component({
@@ -11,12 +12,14 @@ import { DetailsProductService } from 'src/app/services/catalog/details/detailsP
 export class DetailsComponent implements OnInit {
   public product = [] as any;
   public imageCount: number = 0;
+  public deleteBtn: boolean = false
 
   constructor(
     private detailsProduct: DetailsProductService,
     private router: Router,
     private route: ActivatedRoute,
-    public appComponent: AppComponent
+    public appComponent: AppComponent,
+    private catalogService: CatalogService
   ) {}
 
   ngOnInit() {
@@ -25,6 +28,19 @@ export class DetailsComponent implements OnInit {
     this.detailsProduct
       .getProducts(id)
       .subscribe((data) => this.product = data);
+  }
+
+  onDeleteHandler() {
+    let id = this.route.snapshot.params['id'];
+    let cookie = this.appComponent.userFromToken
+    cookie.token = this.appComponent.sessionStorage
+
+    this.catalogService.deleteProduct({productId: id, cookie})
+        .subscribe((res: any) => {
+          if(!res?.message) {
+            this.router.navigate(['/ownProducts'])
+          }
+        })
   }
 
   nextImage = () => {
