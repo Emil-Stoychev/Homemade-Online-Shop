@@ -8,7 +8,6 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
   public res = [] as any;
 
   constructor(private router: Router, private userService: UserService) {}
@@ -18,11 +17,13 @@ export class LoginComponent {
   }
 
   onSubmit(userForm: object) {
+    
     this.userService.login(userForm).subscribe((data) => {
-      this.res = data
+      this.res = data;
+      
+      if (!this.res.message) {
+        localStorage.setItem('sessionStorage', this.res);
 
-      if(!this.res.message) {
-        localStorage.setItem('sessionStorage', this.res)
         this.router.navigate(['/catalog']);
       }
     });

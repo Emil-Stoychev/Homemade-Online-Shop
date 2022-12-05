@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit{
-  public sessionStorage: any;
+  public sessionStorage = localStorage.getItem('sessionStorage');;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.sessionStorage = localStorage.getItem('sessionStorage')
+    this.sessionStorage = localStorage.getItem('sessionStorage');
   }
 
   logoutHandler = () => {
@@ -21,6 +21,4 @@ export class HeaderComponent implements OnInit{
 
     this.router.navigate(['/login'])
   }
-
-  
 }
