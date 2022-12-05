@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { CatalogService } from 'src/app/services/catalog/catalog.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class CreateComponent {
 
   public res = [] as any;
 
-  constructor(private router: Router, private catalogService: CatalogService) {}
+  constructor(private router: Router, private catalogService: CatalogService, private appComponent: AppComponent) {}
 
   goToLogin() {
     this.router.navigate(['/login']);
@@ -28,19 +29,17 @@ export class CreateComponent {
   onSubmit(createForm: any) {
     createForm.images = this.allImages
     createForm.cookie = {}
-    createForm.cookie.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVhOTI0NDc4MGMyZTQ0OWFiZTZmNGQiLCJlbWFpbCI6ImFzZEBhYnYuYmciLCJtb25leSI6OTEsImlhdCI6MTY3MDA2OTM3NSwiZXhwIjoxNjcwMjQyMTc1fQ.D6tqGANL-aH1w11trvjyA17C5C4wAenaqoChWLOqyn0'
-    createForm.email = 'asd@abv.bg'
-    createForm.author = '62ea9244780c2e449abe6f4d'
-    createForm.cookie._id = '62ea9244780c2e449abe6f4d'
-    console.log(createForm);
+    createForm.cookie.token = this.appComponent.sessionStorage
+    createForm.email = this.appComponent.userFromToken.email
+    createForm.author = this.appComponent.userFromToken._id
+    createForm.cookie._id = this.appComponent.userFromToken._id
 
-    this.catalogService.createProduct(createForm).subscribe((data) => {
+    this.catalogService.createProduct(createForm).subscribe((data: any) => {
       this.res = data
-      console.log(data);
 
       if(!this.res.message) {
         this.errors = []
-        this.router.navigate(['/catalog']);
+        this.router.navigate(['/catalog/details/' + data?._id]);
       } else {
         this.errors = data
       }
