@@ -5,24 +5,27 @@
         <h2 class="main">Profile</h2>
 
         <div class="shortcut">
+          <div class="image">
+            <img src="{{profile?.image || backupImage}}" alt="">
+          </div>
           <div class="info">
             <h4>Username:</h4>
-            <h3>example</h3>
+            <h3>{{profile?.email.split('@')[0]}}</h3>
           </div>
           <div class="info">
             <h4>Email:</h4>
-            <h3>name@gmail.com</h3>
+            <h3>{{profile?.email}}</h3>
           </div>
           <div class="info">
             <h4>Balance:</h4>
-            <h3>€244</h3>
+            <h3>€{{profile?.money}}</h3>
           </div>
           <div class="info">
-            <h4>Liked products:</h4>
+            <h4>Liked products: {{profile?.likedProducts.length}}</h4>
             <button (click)="clickLikedProductsHandler()">See now</button>
           </div>
           <div class="info">
-            <h4>Own products:</h4>
+            <h4>Own products: {{profile?.ownProducts.length}}</h4>
             <button (click)="clickOnwProductHandler()">See now</button>
           </div>
         </div>

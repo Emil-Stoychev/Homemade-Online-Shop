@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUserLogin, IUserRegister } from '../interfaces/user';
+import { IProfile, IUserLogin, IUserRegister } from '../interfaces/user';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  jwt = new JwtHelperService();
+  public profile: any;
 
   private URL: string = 'http://localhost:3030/users/';
 
@@ -20,12 +23,23 @@ export class UserService {
     return this.http.post<IUserRegister[]>(this.URL + 'register', userData);
   }
 
+  getProfile(token: string) {
+    return this.http.get(this.URL + this.jwtDecode(token)?._id)
+  }
+
   loggedIn() {
-    return !!localStorage.getItem('sessionStorage')
+    return !!localStorage.getItem('sessionStorage');
   }
 
   getToken() {
-    return localStorage.getItem('sessionStorage')
+    return localStorage.getItem('sessionStorage');
   }
 
+  jwtDecode(token: string) {
+    let cookie = this.jwt.decodeToken(token);
+
+    // console.log(cookie);
+
+    return cookie;
+  }
 }

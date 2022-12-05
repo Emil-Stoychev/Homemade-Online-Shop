@@ -9,3 +9,12 @@ export interface IUserRegister {
     rePassword: string,
     image: string
 }
+
+export interface IProfile {
+    email: string,
+    image: string,
+    likedProducts: string[],
+    ownProducts: string[],
+    money: number,
+    _id: string
+}

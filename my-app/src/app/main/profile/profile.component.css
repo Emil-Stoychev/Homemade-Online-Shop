@@ -78,3 +78,19 @@ div.container div.card button:hover {
 div.container div.card .delete button:hover {
     background-color: red;
 }
+
+div.container div.card .shortcut div.image {
+    background-color: rgba(241, 234, 234, 0.233);
+}
+
+div.container div.card .image img {
+    margin: 0 auto;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 100%;
+    transition: all 300ms ease-in-out;
+}
+
+div.container div.card .image img:hover {
+    transform: scale(1.05);
+}
