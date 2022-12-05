@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { DetailsProductService } from 'src/app/services/catalog/details/detailsProduct.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class DetailsComponent implements OnInit {
   constructor(
     private detailsProduct: DetailsProductService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public appComponent: AppComponent
   ) {}
 
   ngOnInit() {

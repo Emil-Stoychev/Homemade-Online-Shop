@@ -18,7 +18,7 @@
 
       <p>Price: <span>€ {{product?.price}}</span></p>
 
-      <div class="btns">
+      <div class="btns" *ngIf="this.appComponent.sessionStorage">
         <button>Edit</button>
         <button>Delete</button>
         <button>Buy</button>
