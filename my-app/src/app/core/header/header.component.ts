@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-header',
@@ -7,16 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit{
-  public sessionStorage = localStorage.getItem('sessionStorage');;
-
-  constructor(private router: Router) {}
-
+  
+  constructor(private router: Router, public appComponent: AppComponent) {}
+  
   ngOnInit() {
-    this.sessionStorage = localStorage.getItem('sessionStorage');
+    this.appComponent.sessionStorage = localStorage.getItem('sessionStorage');
   }
 
   logoutHandler = () => {
-    this.sessionStorage = ''
+    this.appComponent.sessionStorage = ''
     localStorage.removeItem('sessionStorage')
 
     this.router.navigate(['/login'])

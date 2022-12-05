@@ -3,17 +3,17 @@
     <ul class="left-side">
       <li routerLink="">Home</li>
       <li routerLink="catalog">Catalog</li>
-      <li routerLink="create" *ngIf="sessionStorage">Create</li>
-      <li routerLink="ownProducts" *ngIf="sessionStorage">Own products</li>
+      <li routerLink="create" *ngIf="this.appComponent.sessionStorage">Create</li>
+      <li routerLink="ownProducts" *ngIf="this.appComponent.sessionStorage">Own products</li>
     </ul>
 
     <ul class="right-side">
-      <div class="email" routerLink="profile" *ngIf="sessionStorage">
+      <div class="email" routerLink="profile" *ngIf="this.appComponent.sessionStorage">
         Welcome, <span> name@gmail.com</span>!
       </div>
-      <li routerLink="login" *ngIf="!sessionStorage">Login</li>
-      <li routerLink="register" *ngIf="!sessionStorage">Register</li>
-      <li routerLink="logout" (click)="logoutHandler()" *ngIf="sessionStorage">Logout</li>
+      <li routerLink="login" *ngIf="!this.appComponent.sessionStorage">Login</li>
+      <li routerLink="register" *ngIf="!this.appComponent.sessionStorage">Register</li>
+      <li routerLink="logout" (click)="logoutHandler()" *ngIf="this.appComponent.sessionStorage">Logout</li>
     </ul>
   </nav>
 </div>

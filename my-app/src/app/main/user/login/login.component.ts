@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/services/user/user.service';
 export class LoginComponent {
   public res = [] as any;
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService, public appComponent: AppComponent) {}
 
   goToRegister() {
     this.router.navigate(['/register']);
@@ -23,6 +24,7 @@ export class LoginComponent {
       
       if (!this.res.message) {
         localStorage.setItem('sessionStorage', this.res);
+        this.appComponent.sessionStorage = this.userService.getToken()
 
         this.router.navigate(['/catalog']);
       }
