@@ -1,32 +1,21 @@
 <div class="container">
 
-  <div class="card">
-    <img
-      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80"
-      alt="">
-
-    <h2>Headphones</h2>
-
-    <div class="together">
-      <p>Price: <span>€24</span></p>
-
-      <button>See now</button>
+  <ng-container *ngIf="products.length > 0">
+    <div class="card" *ngFor="let product of products">
+      <img
+      src="{{product?.images[0]?.dataString}}"
+      alt="{{product?.images[0]?.name}}">
+      
+      <h2>{{product?.title}}</h2>
+      
+      <div class="together">
+        <p>Price: <span>€{{product?.price}}</span></p>
+        
+        <button (click)="onSelect(product._id)">See now</button>
+      </div>
     </div>
-  </div>
+  </ng-container>
 
-  <div class="card">
-    <img
-      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80"
-      alt="">
-
-    <h2>Watch</h2>
-
-    <div class="together">
-      <p>Price: <span>€44</span></p>
-
-      <button>See now</button>
-    </div>
-
-  </div>
+  <h1 *ngIf="errors.message">You don't have liked products yet!</h1>
 
 </div>
