@@ -8,17 +8,23 @@ import { IProduct } from '../interfaces/product';
 })
 export class CatalogService {
 
-  private URL: string = 'http://localhost:3030/catalog'
+  private URL: string = 'http://localhost:3030/'
 
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.URL)
+    return this.http.get<IProduct[]>(this.URL + 'catalog')
   }
 
   createProduct(data: object): Observable<IProduct[]> {
-    return this.http.post<IProduct[]>(this.URL + '/create', data)
+    return this.http.post<IProduct[]>(this.URL + 'catalog/create', data)
   }
 
+  getOwnProducts(id: string): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(this.URL + 'users/ownProducts/' +  id)
+  }
 
+  getLikedProducts(id: string): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(this.URL + 'users/likedProducts/' +  id)
+  }
 }
