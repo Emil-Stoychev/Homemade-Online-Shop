@@ -13,6 +13,7 @@ export class DetailsComponent implements OnInit {
   public product = [] as any;
   public imageCount: number = 0;
   public isAuthor: boolean = false;
+  public isLiked: boolean = false;
   public deleteBtn: boolean = false;
 
   constructor(
@@ -30,11 +31,44 @@ export class DetailsComponent implements OnInit {
       this.product = data;
 
       this.isAuthor = data?.author == this.appComponent.userFromToken._id;
+      this.isLiked = data?.likes.includes(this.appComponent.userFromToken._id);
     });
   }
 
+  onLikeHandler(productId: string) {
+    this.catalogService
+      .likeProduct({
+        productId,
+        token: this.appComponent.sessionStorage,
+        userId: this.appComponent.userFromToken._id,
+      })
+      .subscribe((res: any) => {
+        if (!res?.message) {
+          this.isLiked = true
+
+          this.product.likes.push(this.appComponent.userFromToken._id)
+        }
+      });
+  }
+
+  onUnLikeHandler(productId: string) {
+    this.catalogService
+      .unlikeProduct({
+        productId,
+        token: this.appComponent.sessionStorage,
+        userId: this.appComponent.userFromToken._id,
+      })
+      .subscribe((res: any) => {
+        if (!res?.message) {
+          this.isLiked = false
+
+          this.product.likes = this.product.likes.filter((x: string) => x != this.appComponent.userFromToken._id)
+        }
+      });
+  }
+
   onEditHandler(id: string) {
-    this.router.navigate(['catalog/edit/' + id])
+    this.router.navigate(['catalog/edit/' + id]);
   }
 
   onDeleteHandler() {

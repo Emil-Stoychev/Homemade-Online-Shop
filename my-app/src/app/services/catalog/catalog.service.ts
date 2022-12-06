@@ -23,6 +23,14 @@ export class CatalogService {
     return this.http.put<IProduct[]>(this.URL + 'catalog/edit/' + data?.productId, data);
   }
 
+  likeProduct(data: any){
+    return this.http.put(this.URL + 'catalog/addProductLikes/' + data?.productId, data);
+  }
+
+  unlikeProduct(data: any){
+    return this.http.put(this.URL + 'catalog/removeProductLikes/' + data?.productId, data);
+  }
+
   getOwnProducts(id: string): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(this.URL + 'users/ownProducts/' + id);
   }
