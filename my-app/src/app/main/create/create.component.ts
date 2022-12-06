@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+
 import { AppComponent } from 'src/app/app.component';
 import { CatalogService } from 'src/app/services/catalog/catalog.service';
 
@@ -9,6 +11,13 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
   styleUrls: ['./create.component.css'],
 })
 export class CreateComponent {
+  public createFormGroup = new FormGroup({
+    title: new FormControl(''),
+    description: new FormControl(''),
+    category: new FormControl(''),
+    price: new FormControl(''),
+  });
+
   public errors: any = [];
   public imageTypes: string[] = [
     'image/png',
@@ -22,19 +31,29 @@ export class CreateComponent {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private catalogService: CatalogService,
     private appComponent: AppComponent
   ) {}
 
-  onSubmit(createForm: any) {
-    createForm.images = this.allImages;
-    createForm.cookie = {};
-    createForm.cookie.token = this.appComponent.sessionStorage;
-    createForm.email = this.appComponent.userFromToken.email;
-    createForm.author = this.appComponent.userFromToken._id;
-    createForm.cookie._id = this.appComponent.userFromToken._id;
+  onSubmit(createFormGroup: any) {
+    let id = this.route.snapshot.params['id'];
 
-    this.catalogService.createProduct(createForm).subscribe((data: any) => {
+    createFormGroup.images = this.allImages;
+    createFormGroup._id = id;
+    createFormGroup.author = this.appComponent.userFromToken._id;
+
+    let dataForm: any = createFormGroup;
+
+    dataForm.cookie = {
+      _id: this.appComponent.userFromToken._id,
+      email: this.appComponent.userFromToken.email,
+      token: this.appComponent.sessionStorage,
+    };
+
+    dataForm.productId = id;
+
+    this.catalogService.createProduct(createFormGroup).subscribe((data: any) => {
       this.res = data;
 
       if (!this.res.message) {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { UserService } from 'src/app/services/user/user.service';
@@ -9,6 +10,11 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  public userLoginForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl(''),
+  });
+  
   public res = [] as any;
 
   constructor(private router: Router, private userService: UserService, public appComponent: AppComponent) {}

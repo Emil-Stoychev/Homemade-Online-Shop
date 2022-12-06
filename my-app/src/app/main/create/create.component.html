@@ -1,6 +1,6 @@
 <div class="container">
 
-    <form #createForm="ngForm" (ngSubmit)="onSubmit(createForm.value)">
+    <form [formGroup]="createFormGroup" (ngSubmit)="onSubmit(createFormGroup.value)">
 
         <!-- <TextError message={errors} /> Some error can be visible here -->
         <h2>Create form</h2>
@@ -18,7 +18,7 @@
                 id="title"
                 minlength="3"
                 maxlength="15"
-                ngModel
+                formControlName="title"
             />
         </div>
         <div class="desc">
@@ -31,7 +31,7 @@
                 id="desc"
                 minlength="3"
                 maxlength="100"
-                ngModel
+                formControlName="description"
             ></textarea>
         </div>
 
@@ -46,7 +46,7 @@
                 id="category"
                 minlength="3"
                 maxlength="15"
-                ngModel
+                formControlName="category"
             />
         </div>
         <div class="price">
@@ -58,13 +58,13 @@
                 id="price"
                 placeholder="Price in EURO"
                 min="1"
-                ngModel
+                formControlName="price"
             />
         </div>
 
         <div class="file">
             <label for="image">Product images</label>
-            <input type="file" id="image" name="images" ngModel (change)="addImageChangeHandler($event.target)">
+            <input type="file" id="image" name="images" (change)="addImageChangeHandler($event.target)">
 
             <div class="smallImages" *ngIf="allImages?.length > 0">
                 <div class="image" *ngFor="let image of allImages">

@@ -1,5 +1,5 @@
 <div class="container">
-    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+    <form [formGroup]="userLoginForm" (ngSubmit)="onSubmit(userLoginForm.value)">
 
         <h1>Login</h1>
 
@@ -7,12 +7,12 @@
 
         <div class="email">
             <label for="email">Email</label>
-            <input type="email" name="email" ngModel id="email" placeholder="example@gmail.com" minlength="3" >
+            <input type="email" formControlName="email" name="email" id="email" placeholder="example@gmail.com" minlength="3" >
         </div>
 
         <div class="password">
             <label for="password">Password</label>
-            <input type="password" name="password" ngModel id="password" placeholder="******" minlength="3">
+            <input type="password" formControlName="password" name="password" id="password" placeholder="******" minlength="3">
         </div>
 
         <button>Submit</button>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -8,6 +9,12 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
+  public userRegisterGroup = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl(''),
+    rePassword: new FormControl(''),
+  });
+  
   public errors: string = ''
   public imageTypes: string[] = [
     'image/png',
@@ -25,10 +32,10 @@ export class RegisterComponent {
     this.router.navigate(['/login']);
   }
 
-  onSubmit(userForm: any) {
-    userForm.image = this.allImages[0]?.dataString || ''
-    
-    this.userService.register(userForm).subscribe((data) => {
+  onSubmit(userRegisterGroup: any) {
+    userRegisterGroup.image = this.allImages[0]?.dataString || ''
+
+    this.userService.register(userRegisterGroup).subscribe((data) => {
       this.res = data
 
       if(!this.res.message) {
