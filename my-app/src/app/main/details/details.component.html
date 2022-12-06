@@ -18,10 +18,10 @@
       <p>Price: <span>€ {{product?.price}}</span></p>
 
       <div class="btns" *ngIf="this.appComponent.sessionStorage">
-        <button>Edit</button>
-        <button (click)="deleteBtn = !deleteBtn">Delete</button>
-        <button>Buy</button>
-        <button>Like</button>
+        <button *ngIf="isAuthor" (click)="onEditHandler(product?._id)">Edit</button>
+        <button *ngIf="isAuthor" (click)="deleteBtn = !deleteBtn">Delete</button>
+        <button *ngIf="!isAuthor">Buy</button>
+        <button *ngIf="!isAuthor">Like</button>
       </div>
 
       <div class='deleteQA' *ngIf="deleteBtn">

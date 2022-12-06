@@ -6,10 +6,10 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  styleUrls: ['./create.component.css'],
 })
 export class CreateComponent {
-  public errors: any;
+  public errors: any = [];
   public imageTypes: string[] = [
     'image/png',
     'image/jpeg',
@@ -20,28 +20,28 @@ export class CreateComponent {
 
   public res = [] as any;
 
-  constructor(private router: Router, private catalogService: CatalogService, private appComponent: AppComponent) {}
-
-  goToLogin() {
-    this.router.navigate(['/login']);
-  }
+  constructor(
+    private router: Router,
+    private catalogService: CatalogService,
+    private appComponent: AppComponent
+  ) {}
 
   onSubmit(createForm: any) {
-    createForm.images = this.allImages
-    createForm.cookie = {}
-    createForm.cookie.token = this.appComponent.sessionStorage
-    createForm.email = this.appComponent.userFromToken.email
-    createForm.author = this.appComponent.userFromToken._id
-    createForm.cookie._id = this.appComponent.userFromToken._id
+    createForm.images = this.allImages;
+    createForm.cookie = {};
+    createForm.cookie.token = this.appComponent.sessionStorage;
+    createForm.email = this.appComponent.userFromToken.email;
+    createForm.author = this.appComponent.userFromToken._id;
+    createForm.cookie._id = this.appComponent.userFromToken._id;
 
     this.catalogService.createProduct(createForm).subscribe((data: any) => {
-      this.res = data
+      this.res = data;
 
-      if(!this.res.message) {
-        this.errors = []
+      if (!this.res.message) {
+        this.errors = [];
         this.router.navigate(['/catalog/details/' + data?._id]);
       } else {
-        this.errors = data
+        this.errors = data;
       }
     });
   }
@@ -62,46 +62,50 @@ export class CreateComponent {
         date,
         dataString: base64,
       };
-      
-        if (this.allImages.some((x: any) => x.dataString == imageData.dataString)) {
-            if (this.errors.message !== 'This image already exist!') {
-                this.errors.message = 'This image already exist!'
 
-                setTimeout(() => {
-                  this.errors = []
-                }, 2000);
-            }
-        } else {
-            if(this.allImages.length > 5) {
-                if (this.errors.message !== 'You cannot upload more than 6 images!') {
-                  this.errors.message = 'You cannot upload more than 6 images!'
+      if (
+        this.allImages.some((x: any) => x.dataString == imageData.dataString)
+      ) {
+        if (this.errors.message !== 'This image already exist!') {
+          this.errors.message = 'This image already exist!';
 
-                    setTimeout(() => {
-                      this.errors = []
-                    }, 2000);
-                }
-            } else {
-              this.allImages.push(imageData)
-            }
+          setTimeout(() => {
+            this.errors = [];
+          }, 2000);
         }
-    } else {
-        if (this.errors.message !== 'File must be a image!') {
-          this.errors.message = 'File must be a image!'
+      } else {
+        if (this.allImages.length > 5) {
+          if (this.errors.message !== 'You cannot upload more than 6 images!') {
+            this.errors.message = 'You cannot upload more than 6 images!';
 
             setTimeout(() => {
-              this.errors = []
+              this.errors = [];
             }, 2000);
+          }
+        } else {
+          this.allImages.push(imageData);
         }
+      }
+    } else {
+      if (this.errors.message !== 'File must be a image!') {
+        this.errors.message = 'File must be a image!';
+
+        setTimeout(() => {
+          this.errors = [];
+        }, 2000);
+      }
     }
 
-    e.value = null
+    e.value = null;
   }
 
   removeImage = (e: any) => {
-    let currImage = e.parentElement.childNodes[0].src
+    let currImage = e.parentElement.childNodes[0].src;
 
-    this.allImages = this.allImages.filter((x: any) => x.dataString != currImage)
-}
+    this.allImages = this.allImages.filter(
+      (x: any) => x.dataString != currImage
+    );
+  };
 
   convertBase64 = (file: any) => {
     return new Promise((resolve, reject) => {

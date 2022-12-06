@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 
 import { HomeComponent } from './home/home.component';
 import { CatalogComponent } from './catalog/catalog.component';
@@ -23,7 +23,7 @@ import { UserModule } from './user/user.module';
     DetailsComponent,
     EditComponent,
   ],
-  imports: [CommonModule, UserModule, FormsModule],
+  imports: [CommonModule, UserModule, FormsModule, ReactiveFormsModule],
   exports: [
     HomeComponent,
     CatalogComponent,

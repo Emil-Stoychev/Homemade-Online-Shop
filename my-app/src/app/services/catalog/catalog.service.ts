@@ -19,6 +19,10 @@ export class CatalogService {
     return this.http.post<IProduct[]>(this.URL + 'catalog/create', data);
   }
 
+  editProduct(data: any): Observable<IProduct[]> {
+    return this.http.put<IProduct[]>(this.URL + 'catalog/edit/' + data?.productId, data);
+  }
+
   getOwnProducts(id: string): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(this.URL + 'users/ownProducts/' + id);
   }

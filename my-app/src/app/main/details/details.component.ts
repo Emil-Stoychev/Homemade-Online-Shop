@@ -12,7 +12,8 @@ import { DetailsProductService } from 'src/app/services/catalog/details/detailsP
 export class DetailsComponent implements OnInit {
   public product = [] as any;
   public imageCount: number = 0;
-  public deleteBtn: boolean = false
+  public isAuthor: boolean = false;
+  public deleteBtn: boolean = false;
 
   constructor(
     private detailsProduct: DetailsProductService,
@@ -25,37 +26,44 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
 
-    this.detailsProduct
-      .getProducts(id)
-      .subscribe((data) => this.product = data);
+    this.detailsProduct.getProducts(id).subscribe((data: any) => {
+      this.product = data;
+
+      this.isAuthor = data?.author == this.appComponent.userFromToken._id;
+    });
+  }
+
+  onEditHandler(id: string) {
+    this.router.navigate(['catalog/edit/' + id])
   }
 
   onDeleteHandler() {
     let id = this.route.snapshot.params['id'];
-    let cookie = this.appComponent.userFromToken
-    cookie.token = this.appComponent.sessionStorage
+    let cookie = this.appComponent.userFromToken;
+    cookie.token = this.appComponent.sessionStorage;
 
-    this.catalogService.deleteProduct({productId: id, cookie})
-        .subscribe((res: any) => {
-          if(!res?.message) {
-            this.router.navigate(['/ownProducts'])
-          }
-        })
+    this.catalogService
+      .deleteProduct({ productId: id, cookie })
+      .subscribe((res: any) => {
+        if (!res?.message) {
+          this.router.navigate(['/ownProducts']);
+        }
+      });
   }
 
   nextImage = () => {
     if (this.imageCount > this.product?.images.length - 2) {
       this.imageCount = 0;
     } else {
-      this.imageCount++
+      this.imageCount++;
     }
   };
 
   previousImage = () => {
     if (this.imageCount < 1) {
-      this.imageCount = this.product?.images.length - 1
+      this.imageCount = this.product?.images.length - 1;
     } else {
-      this.imageCount--
+      this.imageCount--;
     }
   };
 }
