@@ -94,3 +94,21 @@ div.container div.card .image img {
 div.container div.card .image img:hover {
     transform: scale(1.05);
 }
+
+div.container div.card .deleteQA {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+div.container div.card .deleteQA span {
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.692);
+}
+
+div.container div.card .deleteBtns {
+    display: flex;
+    gap: 1rem;
+}

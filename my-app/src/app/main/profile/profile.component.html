@@ -1,39 +1,48 @@
 <div class="container">
 
-    <div class="card">
+  <div class="card">
 
-        <h2 class="main">Profile</h2>
+    <h2 class="main">Profile</h2>
 
-        <div class="shortcut">
-          <div class="image">
-            <img src="{{profile?.image || backupImage}}" alt="">
-          </div>
-          <div class="info">
-            <h4>Username:</h4>
-            <h3>{{profile?.email.split('@')[0]}}</h3>
-          </div>
-          <div class="info">
-            <h4>Email:</h4>
-            <h3>{{profile?.email}}</h3>
-          </div>
-          <div class="info">
-            <h4>Balance:</h4>
-            <h3>€{{profile?.money}}</h3>
-          </div>
-          <div class="info">
-            <h4>Liked products: {{profile?.likedProducts.length}}</h4>
-            <button (click)="clickLikedProductsHandler()">See now</button>
-          </div>
-          <div class="info">
-            <h4>Own products: {{profile?.ownProducts.length}}</h4>
-            <button (click)="clickOnwProductHandler()">See now</button>
-          </div>
-        </div>
-
-        <div class="delete">
-          <button>DELETE ACCOUNT</button>
-        </div>
-
+    <div class="shortcut">
+      <div class="image">
+        <img src="{{profile?.image || backupImage}}" alt="">
+      </div>
+      <div class="info">
+        <h4>Username:</h4>
+        <h3>{{profile?.email.split('@')[0]}}</h3>
+      </div>
+      <div class="info">
+        <h4>Email:</h4>
+        <h3>{{profile?.email}}</h3>
+      </div>
+      <div class="info">
+        <h4>Balance:</h4>
+        <h3>€{{profile?.money}}</h3>
+      </div>
+      <div class="info">
+        <h4>Liked products: {{profile?.likedProducts.length}}</h4>
+        <button (click)="clickLikedProductsHandler()">See now</button>
+      </div>
+      <div class="info">
+        <h4>Own products: {{profile?.ownProducts.length}}</h4>
+        <button (click)="clickOnwProductHandler()">See now</button>
+      </div>
     </div>
+
+    <div class="delete">
+      <button *ngIf="!isDelete" (click)="isDelete = true">DELETE ACCOUNT</button>
+
+      <div class='deleteQA' *ngIf="isDelete">
+        <label for="deleteQ">Please type <span>{{profile?.email}}</span> to confirm!</label>
+        <input type="text" name="deleteConfirm" id="deleteQ">
+        <div class='deleteBtns'>
+          <button (click)="onDeleteHandler($event)">Confirm</button>
+          <button (click)="isDelete = false">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 </div>

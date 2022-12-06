@@ -24,7 +24,16 @@ export class UserService {
   }
 
   getProfile(token: string) {
-    return this.http.get(this.URL + this.jwtDecode(token)?._id)
+    return this.http.get(this.URL + this.jwtDecode(token)?._id);
+  }
+
+  deleteProfile(id: string, data: any) {
+    return this.http.delete(this.URL + 'deleteAccount/' + id, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
   }
 
   loggedIn() {
