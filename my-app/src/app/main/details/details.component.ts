@@ -14,6 +14,7 @@ export class DetailsComponent implements OnInit {
   public imageCount: number = 0;
   public isAuthor: boolean = false;
   public isLiked: boolean = false;
+  public isVisible: boolean = false;
   public deleteBtn: boolean = false;
 
   constructor(
@@ -32,7 +33,24 @@ export class DetailsComponent implements OnInit {
 
       this.isAuthor = data?.author == this.appComponent.userFromToken._id;
       this.isLiked = data?.likes.includes(this.appComponent.userFromToken._id);
+
+      if (this.isAuthor) {
+        this.isVisible = data?.visible;
+      }
     });
+  }
+
+  changeStatusHandler(productId: string) {
+    this.isVisible = !this.isVisible;
+
+    let data = {
+      productId,
+      cookie: {
+        token: this.appComponent.sessionStorage,
+      },
+    };
+
+    this.catalogService.changeProductStatus(data);
   }
 
   onLikeHandler(productId: string) {
@@ -44,9 +62,9 @@ export class DetailsComponent implements OnInit {
       })
       .subscribe((res: any) => {
         if (!res?.message) {
-          this.isLiked = true
+          this.isLiked = true;
 
-          this.product.likes.push(this.appComponent.userFromToken._id)
+          this.product.likes.push(this.appComponent.userFromToken._id);
         }
       });
   }
@@ -60,9 +78,11 @@ export class DetailsComponent implements OnInit {
       })
       .subscribe((res: any) => {
         if (!res?.message) {
-          this.isLiked = false
+          this.isLiked = false;
 
-          this.product.likes = this.product.likes.filter((x: string) => x != this.appComponent.userFromToken._id)
+          this.product.likes = this.product.likes.filter(
+            (x: string) => x != this.appComponent.userFromToken._id
+          );
         }
       });
   }

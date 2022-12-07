@@ -20,23 +20,24 @@ export class CatalogService {
   }
 
   editProduct(data: any): Observable<IProduct[]> {
-    return this.http.put<IProduct[]>(this.URL + 'catalog/edit/' + data?.productId, data);
+    return this.http.put<IProduct[]>(
+      this.URL + 'catalog/edit/' + data?.productId,
+      data
+    );
   }
 
-  likeProduct(data: any){
-    return this.http.put(this.URL + 'catalog/addProductLikes/' + data?.productId, data);
+  likeProduct(data: any) {
+    return this.http.put(
+      this.URL + 'catalog/addProductLikes/' + data?.productId,
+      data
+    );
   }
 
-  unlikeProduct(data: any){
-    return this.http.put(this.URL + 'catalog/removeProductLikes/' + data?.productId, data);
-  }
-
-  getOwnProducts(id: string): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.URL + 'users/ownProducts/' + id);
-  }
-
-  getLikedProducts(id: string): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.URL + 'users/likedProducts/' + id);
+  changeProductStatus(data: any) {
+    return this.http.put(
+      this.URL + 'catalog/changeProductStatus/' + data?.productId,
+      data.cookie
+    );
   }
 
   deleteProduct(data: any) {
@@ -46,5 +47,20 @@ export class CatalogService {
       },
       body: JSON.stringify(data),
     });
+  }
+
+  unlikeProduct(data: any) {
+    return this.http.put(
+      this.URL + 'catalog/removeProductLikes/' + data?.productId,
+      data
+    );
+  }
+
+  getOwnProducts(id: string): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(this.URL + 'users/ownProducts/' + id);
+  }
+
+  getLikedProducts(id: string): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(this.URL + 'users/likedProducts/' + id);
   }
 }

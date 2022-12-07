@@ -25,6 +25,8 @@
         <button *ngIf="!isAuthor" >Buy</button>
         <button *ngIf="!isAuthor && !isLiked" (click)="onLikeHandler(product?._id)">Like</button>
         <button *ngIf="!isAuthor && isLiked" (click)="onUnLikeHandler(product?._id)">Unlike</button>
+        <button *ngIf="isAuthor && isVisible" (click)="changeStatusHandler(product?._id)">Visible: ON</button>
+        <button *ngIf="isAuthor && !isVisible" (click)="changeStatusHandler(product?._id)">Visible: OFF</button>
       </div>
 
       <div class='deleteQA' *ngIf="deleteBtn">
