@@ -49,8 +49,8 @@ div.container div.card .shortcut div {
     border-bottom-right-radius: 1rem;
 }
 
-div.container div.card .shortcut div:nth-child(4),
-div.container div.card .shortcut div:nth-child(5) {
+div.container div.card .shortcut div:nth-child(5),
+div.container div.card .shortcut div:nth-child(6) {
     padding: 0 0 0 1rem;
 }
 
@@ -64,18 +64,23 @@ div.container div.card button {
     box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.75);
 }
 
-div.container div.card .delete {
+div.container div.card .deleteAndEdit {
     margin: 0 auto;
     margin-top: 1.3rem;
 }
 
-div.container div.card button:hover {
+div.container div.card button:hover,
+div.container div.card .deleteAndEdit button:hover {
     transform: scale(1.2);
     background-color: green;
     color: white;
 }
 
-div.container div.card .delete button:hover {
+div.container div.card .deleteAndEdit button.dangerBtn {
+    margin-right: 2rem;
+}
+
+div.container div.card .deleteAndEdit button.dangerBtn:hover {
     background-color: red;
 }
 
@@ -111,4 +116,12 @@ div.container div.card .deleteQA span {
 div.container div.card .deleteBtns {
     display: flex;
     gap: 1rem;
+}
+
+
+div.container div.card .deleteAndEdit div.editDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

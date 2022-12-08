@@ -27,6 +27,10 @@ export class UserService {
     return this.http.get(this.URL + this.jwtDecode(token)?._id);
   }
 
+  changePicture(data: any) {
+    return this.http.put(this.URL + 'changePicture/' + data?.cookie?._id, data);
+  }
+
   deleteProfile(id: string, data: any) {
     return this.http.delete(this.URL + 'deleteAccount/' + id, {
       headers: {

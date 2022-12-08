@@ -6,7 +6,7 @@
 
     <div class="shortcut">
       <div class="image">
-        <img src="{{profile?.image || backupImage}}" alt="">
+        <img src="{{allImages[0]?.dataString || profile?.image || backupImage}}" alt="">
       </div>
       <div class="info">
         <h4>Username:</h4>
@@ -30,8 +30,9 @@
       </div>
     </div>
 
-    <div class="delete">
-      <button *ngIf="!isDelete" (click)="isDelete = true">DELETE ACCOUNT</button>
+    <div class="deleteAndEdit">
+      <button class="dangerBtn" *ngIf="!isDelete && !isEdit" (click)="isDelete = true">DELETE ACCOUNT</button>
+      <button *ngIf="!isEdit && !isDelete" (click)="isEdit = true">EDIT ACCOUNT</button>
 
       <div class='deleteQA' *ngIf="isDelete">
         <label for="deleteQ">Please type <span>{{profile?.email}}</span> to confirm!</label>
@@ -41,6 +42,17 @@
           <button (click)="isDelete = false">Cancel</button>
         </div>
       </div>
+
+      <div class='editDiv' *ngIf="isEdit">
+        <label for="image">Profile picture</label>
+        <input type="file" id="image" name="images" (change)="addImageChangeHandler($event.target)">
+        <br>
+        <div class="deleteBtns">
+          <button (click)="onPictureSaveHandler()">Save</button>
+          <button (click)="onPictureCancelHandler()">Cancel</button>
+        </div>
+      </div>
+
     </div>
 
   </div>
