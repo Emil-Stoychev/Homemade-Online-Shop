@@ -11,6 +11,7 @@ div.container .card {
     margin: 0 auto;
     margin-top: 14rem;
     box-shadow: 10px 10px 7px 0px rgba(0,0,0,0.75);
+    border-radius: 1rem;
 }
 
 div.container .card div {
@@ -128,6 +129,146 @@ div.container .card div.details div.deleteQA .errorsMessage {
     text-align: center;
     color: rgba(255, 0, 0, 0.712);
     padding: 0.5rem 0;
+}
+
+            /* Comments */
+
+.comments-section {
+    padding-top: 4rem;
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Type-comment */
+
+.comments-section .type {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    /* background-color: rgba(128, 128, 128, 0.342); */
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 7px 0px rgba(0,0,0,0.75);
+
+}
+
+.comments-section .type textarea {
+    width: 40%;
+    height: 60px;
+    min-width: 20%;
+    min-height: 60px;
+    max-width: 60%;
+    max-height: 120px;
+    border-radius: 0.5rem;
+}
+
+.comments-section .type .btn button {
+    padding: 0.2rem 1rem;
+    font-weight: 900;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+.comments-section .type .btn button:hover {
+    transform: scale(1.05);
+    background-color: green;
+    color: white;
+}
+
+
+/* All comments */
+
+.comments-section .all-comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 3rem;
+    /* background-color: rgba(128, 128, 128, 0.342); */
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 7px 0px rgba(0,0,0,0.75);
+}
+
+.comments-section .all-comments .comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2rem;
+    border-bottom: outset;
+    border-right: outset;
+    /* background-color: rgba(255, 255, 255, 0.486); */
+    border-radius: 1rem;
+}
+
+.comments-section .all-comments .comments .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.comments-section .all-comments .comments .main > p {
+    margin-left: 1rem;
+}
+
+.comments-section .all-comments .comments .main hr {
+    width: 100%;
+    height: 2px;
+    color: black;
+    margin-left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.comments-section .all-comments .comments .main .info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comments-section .all-comments .comments .main img {
+    width: 64px;
+    height: 64px;
+    border-radius: 100%;
+}
+
+.comments-section .all-comments .comments .main .btns {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.comments-section .all-comments .comments .main .btns button {
+    padding: 0.2rem 1rem;
+    font-weight: 900;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+.comments-section .all-comments .comments .main .btns button:hover {
+    transform: scale(1.1);
+    background-color: green;
+    color: white;
+}
+
+/* Nested comments */
+
+.comments-section .all-comments .comments .nested-comments {
+    padding-top: 0;
+    margin-top: -1.6rem;
+    padding-left: 5rem;
 }
 
 

@@ -46,4 +46,67 @@
     </div>
   </div>
 
+  <div class="comments-section">
+    <h2>Comments</h2>
+    
+    <div class="type">
+      <textarea name="comment" cols="30" rows="10"></textarea>
+
+      <div class="btn">
+        <button>Comment</button>
+      </div>
+    </div>
+
+    <div class="all-comments">
+
+      <div class="comments" *ngFor="let comments of product?.comments">
+
+        <div class="main">
+
+          <div class="info">
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="">
+
+            <div class="sub-info">
+              <h3>{{comments?.email}}</h3>
+              <p>{{comments?.date}}</p>
+            </div>
+          </div>
+
+          <p>{{comments?.title}}</p>
+
+          <hr>
+          <div class="btns">
+            <button>Like</button>
+            <p>{{comments?.likes.length}} likes</p>
+            <button>Reply</button>
+            <button>Edit</button>
+          </div>
+        </div>
+
+        <div class="nested-comments main" *ngFor="let nestedComment of comments?.nestedComments">
+          <div class="info">
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="">
+
+            <div class="sub-info">
+              <h3>{{nestedComment?.email}}</h3>
+              <p>{{nestedComment?.date}}</p>
+            </div>
+          </div>
+
+          <p>{{nestedComment?.title}}</p>
+
+          <hr>
+          <div class="btns">
+            <button>Like</button>
+            <p>{{nestedComment?.likes.length}} likes</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
 </div>
