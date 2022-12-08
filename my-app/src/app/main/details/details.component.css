@@ -20,6 +20,11 @@ div.container .card div {
 
 div.container .card div.image {
     position: relative;
+    min-height: 600px;
+    max-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 div.container .card div.image img {
@@ -98,5 +103,32 @@ div.container .card div.details div.btns button:hover {
     background-color: green;
     color: white;
 }
+
+div.container .card div.details div.deleteQA button {
+    padding: 0.2rem 1rem;
+    font-weight: 900;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    margin-right: 1rem;
+}   
+
+div.container .card div.details div.deleteQA button:hover {
+    transform: scale(1.2);
+    background-color: green;
+    color: white;
+}
+
+div.container .card div.details div.deleteQA button.dangerBtn:hover {
+    background-color: red;
+}
+
+div.container .card div.details div.deleteQA .errorsMessage {
+    text-align: center;
+    color: rgba(255, 0, 0, 0.712);
+    padding: 0.5rem 0;
+}
+
 
 

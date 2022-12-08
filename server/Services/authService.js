@@ -157,10 +157,13 @@ const updateUserAfterBuyNewProduct = async (userId, product) => {
             return { message: "Product owner doesn't exist!" }
         }
 
+        if(user.money < product.price) {
+            return { message: "You don't have enough money!" }
+        }
+
         userFromProduct.money = Number(userFromProduct.money) + Number(product.price)
         userFromProduct.ownProducts = userFromProduct.ownProducts.filter(x => x != product._id)
         userFromProduct.messages.push(messageToOwner(product._id, product.title, product.price, user.email))
-
 
         await User.findByIdAndUpdate(userFromProduct._id, userFromProduct)
 

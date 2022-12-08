@@ -40,6 +40,13 @@ export class CatalogService {
     );
   }
 
+  buyProduct(data: any) {
+    return this.http.put(
+      this.URL + 'catalog/changeProductAuthor/' + data?.productId,
+      data
+    );
+  }
+
   deleteProduct(data: any) {
     return this.http.delete(this.URL + 'catalog/delete/' + data?.productId, {
       headers: {

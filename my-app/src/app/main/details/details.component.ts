@@ -12,10 +12,12 @@ import { DetailsProductService } from 'src/app/services/catalog/details/detailsP
 export class DetailsComponent implements OnInit {
   public product = [] as any;
   public imageCount: number = 0;
+  public errors: any = {};
   public isAuthor: boolean = false;
   public isLiked: boolean = false;
   public isVisible: boolean = false;
   public deleteBtn: boolean = false;
+  public buyBtn: boolean = false;
 
   constructor(
     private detailsProduct: DetailsProductService,
@@ -50,7 +52,7 @@ export class DetailsComponent implements OnInit {
       },
     };
 
-    this.catalogService.changeProductStatus(data);
+    this.catalogService.changeProductStatus(data).subscribe(console.log);
   }
 
   onLikeHandler(productId: string) {
@@ -89,6 +91,39 @@ export class DetailsComponent implements OnInit {
 
   onEditHandler(id: string) {
     this.router.navigate(['catalog/edit/' + id]);
+  }
+
+  onBuyHandler() {
+    let id = this.route.snapshot.params['id'];
+    let cookie = this.appComponent.userFromToken;
+    cookie.token = this.appComponent.sessionStorage;
+
+    this.catalogService
+      .buyProduct({ productId: id, cookie })
+      .subscribe((res: any) => {
+        if (!res?.message) {
+          this.buyBtn = false;
+
+          this.product = res;
+
+          this.isAuthor = res?.author == this.appComponent.userFromToken._id;
+          this.isLiked = res?.likes.includes(
+            this.appComponent.userFromToken._id
+          );
+
+          if (this.isAuthor) {
+            this.isVisible = res?.visible;
+          }
+        } else {
+          if (!this.errors.message) {
+            this.errors = res;
+
+            setTimeout(() => {
+              this.errors = {};
+            }, 3000);
+          }
+        }
+      });
   }
 
   onDeleteHandler() {

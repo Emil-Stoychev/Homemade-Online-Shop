@@ -318,18 +318,18 @@ const changeProductAuthor = async (productId, cookie) => {
             return { message: "Product not found" }
         }
 
+        let updatedUser = await updateUserAfterBuyNewProduct(user._id, isProductExist)
+
+        if (updatedUser.message) {
+            return updatedUser
+        }
+
         isProductExist.author = user._id
         isProductExist.email = user.email
         isProductExist.likes = isProductExist.likes.filter(x => x != user._id)
         isProductExist.visible = false
 
         isProductExist.save()
-
-        let updatedUser = await updateUserAfterBuyNewProduct(user._id, isProductExist)
-
-        if (updatedUser.message) {
-            return updatedUser
-        }
 
         return isProductExist
     } catch (error) {

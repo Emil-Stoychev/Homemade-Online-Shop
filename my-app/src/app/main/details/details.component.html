@@ -13,7 +13,9 @@
     <div class="details">
       <h2>{{product?.title}}</h2>
 
-      <p>{{product?.description}}</p>
+      <p>Desc: {{product?.description}}</p>
+
+      <p>Category: {{product?.category}}</p>
 
       <p>Price: <span>€ {{product?.price}}</span></p>
 
@@ -22,17 +24,24 @@
       <div class="btns" *ngIf="this.appComponent.sessionStorage">
         <button *ngIf="isAuthor" (click)="onEditHandler(product?._id)">Edit</button>
         <button *ngIf="isAuthor" (click)="deleteBtn = !deleteBtn">Delete</button>
-        <button *ngIf="!isAuthor" >Buy</button>
+        <button *ngIf="!isAuthor" (click)="buyBtn = !buyBtn">Buy</button>
         <button *ngIf="!isAuthor && !isLiked" (click)="onLikeHandler(product?._id)">Like</button>
         <button *ngIf="!isAuthor && isLiked" (click)="onUnLikeHandler(product?._id)">Unlike</button>
         <button *ngIf="isAuthor && isVisible" (click)="changeStatusHandler(product?._id)">Visible: ON</button>
         <button *ngIf="isAuthor && !isVisible" (click)="changeStatusHandler(product?._id)">Visible: OFF</button>
       </div>
 
-      <div class='deleteQA' *ngIf="deleteBtn">
-        <h2>Are you sure you want to delete this item?</h2>
-        <button (click)="onDeleteHandler()">Yes</button>
-        <button (click)="deleteBtn = false">No</button>
+      <div class='deleteQA' *ngIf="deleteBtn || buyBtn">
+        <h3 *ngIf="deleteBtn">Are you sure you want to delete this item?</h3>
+        <h3 *ngIf="buyBtn">Are you sure you want to buy this item?</h3>
+
+        <button class="dangerBtn" *ngIf="deleteBtn" (click)="onDeleteHandler()">Yes</button>
+        <button *ngIf="deleteBtn" (click)="deleteBtn = false">No</button>
+
+        <h4 class="errorsMessage" *ngIf="errors.message">{{errors?.message}}</h4>
+        <button *ngIf="buyBtn" (click)="onBuyHandler()">Yes</button>
+        <button *ngIf="buyBtn" (click)="buyBtn = false">No</button>
+
       </div>
     </div>
   </div>
