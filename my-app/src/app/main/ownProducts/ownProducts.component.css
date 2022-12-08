@@ -6,7 +6,7 @@ div.container {
     margin: 0 auto;
     gap: 3rem;
     flex-wrap: wrap;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 div.container .card {
