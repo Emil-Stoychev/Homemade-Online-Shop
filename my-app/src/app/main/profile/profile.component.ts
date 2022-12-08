@@ -46,20 +46,26 @@ export class ProfileComponent implements OnInit {
 
   onPictureCancelHandler() {
     this.isEdit = false;
-    this.allImages = []
+    this.allImages = [];
   }
 
   onPictureSaveHandler() {
     this.isEdit = false;
 
-    this.appComponent.userFromToken.token = this.appComponent.sessionStorage
+    if (this.allImages.length > 0) {
+      if (this.allImages[0]?.dataString == this.profile.image) {
+        return;
+      }
 
-    let data = {
-      image: this.allImages[0]?.dataString,
-      cookie: this.appComponent.userFromToken
+      this.appComponent.userFromToken.token = this.appComponent.sessionStorage;
+
+      let data = {
+        image: this.allImages[0]?.dataString,
+        cookie: this.appComponent.userFromToken,
+      };
+
+      this.userService.changePicture(data).subscribe();
     }
-
-    this.userService.changePicture(data).subscribe()
   }
 
   onDeleteHandler($event: any) {
