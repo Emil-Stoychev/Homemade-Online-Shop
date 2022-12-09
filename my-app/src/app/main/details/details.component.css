@@ -149,7 +149,7 @@ div.container .card div.details div.deleteQA .errorsMessage {
     flex-direction: column;
     justify-content: flex-start;
     gap: 0.5rem;
-    /* background-color: rgba(128, 128, 128, 0.342); */
+    background-color: rgba(128, 128, 128, 0.342);
     padding: 1.5rem;
     border-radius: 1rem;
     box-shadow: 10px 10px 7px 0px rgba(0,0,0,0.75);
@@ -190,7 +190,7 @@ div.container .card div.details div.deleteQA .errorsMessage {
     justify-content: flex-start;
     gap: 1rem;
     margin-top: 3rem;
-    /* background-color: rgba(128, 128, 128, 0.342); */
+    background-color: rgba(128, 128, 128, 0.342);
     padding: 1rem;
     border-radius: 1rem;
     box-shadow: 10px 10px 7px 0px rgba(0,0,0,0.75);
@@ -203,7 +203,7 @@ div.container .card div.details div.deleteQA .errorsMessage {
     gap: 2rem;
     border-bottom: outset;
     border-right: outset;
-    /* background-color: rgba(255, 255, 255, 0.486); */
+    background-color: rgba(255, 255, 255, 0.486);
     border-radius: 1rem;
 }
 

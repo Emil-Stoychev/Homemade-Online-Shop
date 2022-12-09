@@ -19,6 +19,14 @@ export class CatalogService {
     return this.http.post<IProduct[]>(this.URL + 'catalog/create', data);
   }
 
+  addCommentToProduct(data: object) {
+    return this.http.post(this.URL + 'catalog/addComment', data);
+  }
+
+  likeComment(data: any) {
+    return this.http.put(this.URL + 'catalog/likeComment/' + data?.commentId, data)
+  }
+
   editProduct(data: any): Observable<IProduct[]> {
     return this.http.put<IProduct[]>(
       this.URL + 'catalog/edit/' + data?.productId,

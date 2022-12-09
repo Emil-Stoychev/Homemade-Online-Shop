@@ -48,13 +48,16 @@
 
   <div class="comments-section">
     <h2>Comments</h2>
-    
-    <div class="type">
-      <textarea name="comment" cols="30" rows="10"></textarea>
 
-      <div class="btn">
-        <button>Comment</button>
-      </div>
+    <div class="type">
+      <form [formGroup]="commentForm" (ngSubmit)="onCommentSubmit(commentForm.value)">
+        <textarea name="comment" formControlName="comment" cols="30" rows="10"></textarea>
+
+        <div class="btn">
+          <button type="submit">Comment</button>
+        </div>
+      </form>
+
     </div>
 
     <div class="all-comments">
@@ -72,14 +75,19 @@
             </div>
           </div>
 
-          <p>{{comments?.title}}</p>
+          <div class="editComment" *ngIf="isCommentEdit">
+            <input type="text" name="comment" value="{{comments?.title}}">
+            <button>Save</button>
+            <button (click)="isCommentEdit = false">Cancel</button>
+          </div>
+          <p *ngIf="!isCommentEdit">{{comments?.title}}</p>
 
           <hr>
           <div class="btns">
-            <button>Like</button>
+            <button (click)="likeComment(comments?._id)">Like</button>
             <p>{{comments?.likes.length}} likes</p>
             <button>Reply</button>
-            <button>Edit</button>
+            <button *ngIf="!isCommentEdit" (click)="editComment($event)">Edit</button>
           </div>
         </div>
 
@@ -97,7 +105,7 @@
 
           <hr>
           <div class="btns">
-            <button>Like</button>
+            <button (click)="likeNestedComment({nestedComment, comments})">Like</button>
             <p>{{nestedComment?.likes.length}} likes</p>
           </div>
         </div>
