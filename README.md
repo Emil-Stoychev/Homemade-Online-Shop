@@ -6,6 +6,6 @@ The idea of the application is an Online Store where after successful registrati
 
 **BONUS:** You can upload images from your device, hosting
 
-## [Client API Documentation](./client/clientDocumentation.md)
+## [Client API Documentation](./my-app/clientDocumentation.md)
 
 ## [Backend API Documentation](./server/serverDocumentation.md)
