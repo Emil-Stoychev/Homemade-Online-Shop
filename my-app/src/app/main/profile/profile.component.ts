@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userService
-      .getProfile(this.appComponent.sessionStorage)
+      .getProfile(this.appComponent.sessionStorage || localStorage.getItem('sessionStorage'))
       .subscribe((data) => (this.profile = data));
   }
 
@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onDeleteHandler($event: any) {
-    let inputText = $event.target.parentElement.childNodes[1].value;
+    let inputText = $event.target.parentElement.parentElement.childNodes[1].value;
 
     if (inputText == this.appComponent.userFromToken.email) {
       this.userService
