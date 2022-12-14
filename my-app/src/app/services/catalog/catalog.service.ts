@@ -7,7 +7,7 @@ import { IProduct } from '../interfaces/product';
   providedIn: 'root',
 })
 export class CatalogService {
-  private URL: string = 'http://localhost:3030/';
+  private URL: string = `${window.location.protocol}//${window.location.hostname}:3030/`;
 
   constructor(private http: HttpClient) {}
 

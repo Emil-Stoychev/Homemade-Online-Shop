@@ -11,7 +11,7 @@ export class UserService {
   jwt = new JwtHelperService();
   public profile: any;
 
-  private URL: string = 'http://localhost:3030/users/';
+  private URL: string = `${window.location.protocol}//${window.location.hostname}:3030/users/`
 
   constructor(private http: HttpClient) {}
 

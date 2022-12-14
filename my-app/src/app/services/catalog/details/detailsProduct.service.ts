@@ -8,7 +8,7 @@ import { IProduct } from '../../interfaces/product';
 })
 export class DetailsProductService {
 
-  private URL: string = 'http://localhost:3030/catalog/details/'
+  private URL: string = `${window.location.protocol}//${window.location.hostname}:3030/catalog/details/`
 
   constructor(private http: HttpClient) {}
 
