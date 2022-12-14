@@ -67,7 +67,7 @@
         <div class="main">
 
           <div class="info">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="">
+            <img src='https://ui-avatars.com/api/?size=255&bold=true&background=random&name={{comments?.email}}' alt="">
 
             <div class="sub-info">
               <h3>{{comments?.email}}</h3>
@@ -104,7 +104,7 @@
 
         <div class="nested-comments main" *ngFor="let nestedComment of comments?.nestedComments">
           <div class="info">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="">
+            <img src='https://ui-avatars.com/api/?size=255&bold=true&background=random&name={{nestedComment?.email}}' alt="">
 
             <div class="sub-info">
               <h3>{{nestedComment?.email}}</h3>
