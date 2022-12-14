@@ -75,19 +75,30 @@
             </div>
           </div>
 
-          <div class="editComment" *ngIf="isCommentEdit">
+          <div class="editComment" *ngIf="isCommentEdit == comments?._id">
             <input type="text" name="comment" value="{{comments?.title}}">
-            <button>Save</button>
-            <button (click)="isCommentEdit = false">Cancel</button>
+            <button (click)="updateComment($event, comments?._id)">Save</button>
+            <button (click)="isCommentEdit = ''">Cancel</button>
           </div>
-          <p *ngIf="!isCommentEdit">{{comments?.title}}</p>
+          <p *ngIf="isCommentEdit != comments?._id">{{comments?.title}}</p>
 
           <hr>
           <div class="btns">
             <button (click)="likeComment(comments?._id)">Like</button>
             <p>{{comments?.likes.length}} likes</p>
-            <button>Reply</button>
-            <button *ngIf="!isCommentEdit" (click)="editComment($event)">Edit</button>
+            <button *ngIf="isCommentReply == '' && isCommentEdit == ''"
+              (click)="replyHandler($event, comments?._id)">Reply</button>
+
+            <ng-container *ngIf="comments?.authorId == this.appComponent.userFromToken._id">
+              <button *ngIf="isCommentEdit == '' && isCommentReply == ''"
+                (click)="editComment($event, comments?._id)">Edit</button>
+            </ng-container>
+          </div>
+
+          <div *ngIf="isCommentReply == comments?._id">
+            <input type="text" name="comment" placeholder="Type comment here...">
+            <button (click)="replyCommentData($event, comments?._id)">Comment</button>
+            <button (click)="isCommentReply = ''">Cancel</button>
           </div>
         </div>
 
@@ -101,12 +112,22 @@
             </div>
           </div>
 
-          <p>{{nestedComment?.title}}</p>
+          <div class="editComment" *ngIf="isCommentEdit == nestedComment?._id">
+            <input type="text" name="comment" value="{{nestedComment?.title}}">
+            <button (click)="updateComment($event, nestedComment?._id)">Save</button>
+            <button (click)="isCommentEdit = ''">Cancel</button>
+          </div>
+          <p *ngIf="isCommentEdit != nestedComment?._id">{{nestedComment?.title}}</p>
 
           <hr>
           <div class="btns">
             <button (click)="likeNestedComment({nestedComment, comments})">Like</button>
             <p>{{nestedComment?.likes.length}} likes</p>
+
+            <ng-container *ngIf="nestedComment?.authorId == this.appComponent.userFromToken._id">
+              <button *ngIf="isCommentEdit == '' && isCommentReply == ''"
+                (click)="editComment($event, nestedComment?._id)">Edit</button>
+            </ng-container>
           </div>
         </div>
 

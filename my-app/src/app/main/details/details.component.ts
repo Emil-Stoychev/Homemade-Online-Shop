@@ -18,7 +18,8 @@ export class DetailsComponent implements OnInit {
   public isLiked: boolean = false;
   public isVisible: boolean = false;
   public deleteBtn: boolean = false;
-  public isCommentEdit: boolean = false;
+  public isCommentReply: string = '';
+  public isCommentEdit: string = '';
   public buyBtn: boolean = false;
 
   public commentForm = new FormGroup({
@@ -124,7 +125,9 @@ export class DetailsComponent implements OnInit {
             } else {
               x.nestedComments = x.nestedComments.map((x: any) => {
                 if (x._id == commentData?.nestedComment?._id) {
-                  x.likes = x.likes.filter((x: any) => x != this.appComponent.userFromToken._id);
+                  x.likes = x.likes.filter(
+                    (x: any) => x != this.appComponent.userFromToken._id
+                  );
                 }
 
                 return x;
@@ -140,10 +143,83 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  editComment(e: any) {
-    console.log(e.currentTarget.parentElement.parentElement.childNodes[2]);
+  editComment(e: any, commentId: any) {
+    this.isCommentEdit = commentId;
+  }
 
-    this.isCommentEdit = true
+  updateComment(e: any, commentId: any) {
+    let commentValue = e.currentTarget.parentElement.childNodes[0].value;
+
+    if (commentValue.trim() != '' && commentValue.length > 0) {
+      let data = {
+        commentValue,
+        commentId,
+        cookie: {
+          token: this.appComponent.sessionStorage,
+          email: this.appComponent.userFromToken?.email,
+          _id: this.appComponent.userFromToken?._id,
+        },
+      };
+
+      this.catalogService.editComment(data).subscribe((res: any) => {
+        if (!res.message) {
+          this.product.comments = this.product.comments.map((x: any) => {
+            if (x._id == commentId) {
+              x.title = commentValue;
+            }
+
+            if (x.nestedComments.length > 0) {
+              x.nestedComment = x.nestedComments.map((y: any) => {
+                if (y._id == commentId) {
+                  y.title = commentValue;
+                }
+
+                return y;
+              });
+            }
+            return x;
+          });
+        }
+
+        this.isCommentEdit = '';
+      });
+    }
+  }
+
+  replyHandler(e: any, commentId: any) {
+    this.isCommentReply = commentId;
+  }
+
+  replyCommentData(e: any, commentId: any) {
+    let commentValue = e.currentTarget.parentElement.childNodes[0].value;
+
+    if (commentValue.trim() != '' && commentValue.length > 0) {
+      let data = {
+        commentValue,
+        commentId,
+        cookie: {
+          token: this.appComponent.sessionStorage,
+          email: this.appComponent.userFromToken?.email,
+          _id: this.appComponent.userFromToken?._id,
+        },
+      };
+
+      this.catalogService.replyToComment(data).subscribe((res: any) => {
+        if (!res.message) {
+          this.product.comments = this.product.comments.map((x: any) => {
+            if (x._id == commentId) {
+              x.nestedComments.push(res);
+
+              return x;
+            } else {
+              return x;
+            }
+          });
+        }
+      });
+    }
+
+    this.isCommentReply = '';
   }
 
   changeStatusHandler(productId: string) {

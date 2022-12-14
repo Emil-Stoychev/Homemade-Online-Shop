@@ -23,6 +23,14 @@ export class CatalogService {
     return this.http.post(this.URL + 'catalog/addComment', data);
   }
 
+  editComment(data: any) {
+    return this.http.put(this.URL + 'catalog/editComment/' + data?.commentId, data)
+  }
+
+  replyToComment(data: any) {
+    return this.http.put(this.URL + 'catalog/addReplyComment/' + data?.commentId, data)
+  }
+
   likeComment(data: any) {
     return this.http.put(this.URL + 'catalog/likeComment/' + data?.commentId, data)
   }
