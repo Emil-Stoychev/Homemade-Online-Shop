@@ -11,6 +11,10 @@ router.get('/', async (req, res) => {
     res.json(await authService.getAll())
 })
 
+router.get('/checkUserToken/:token', async (req, res) => {
+    res.json(await authService.validUserToken(req.params.token))
+})
+
 router.get('/:userId', async (req, res) => {
     res.json(await authService.getUserById(req.params.userId))
 })
@@ -83,13 +87,13 @@ router.post('/askUser/:userId', async (req, res) => {
     res.json(updatedUser)
 })
 
-router.get('/getChatById/:chatId', async(req, res) => {
+router.get('/getChatById/:chatId', async (req, res) => {
     let userChats = await authService.getChatById(req.params.chatId)
 
     res.json(userChats)
 })
 
-router.get('/getAllChats/:userId', async(req, res) => {
+router.get('/getAllChats/:userId', async (req, res) => {
     let userChats = await authService.getAllChats(req.params.userId)
 
     res.json(userChats)

@@ -26,6 +26,34 @@ const getUserById = async (userId) => {
     }
 }
 
+const validUserToken = async (token) => {
+    try {
+        if (!token) {
+            return { message: "Invalid access token!" }
+        }
+
+        let isValidToken = await authMiddleware(token)
+
+        if (isValidToken.message) {
+            return isValidToken
+        }
+
+        if (blackList.has(token)) {
+            return { message: "Invalid access token!" }
+        }
+
+        let user = await User.findOne({ _id: isValidToken._id })
+
+        if (!user) {
+            return { message: "User doesn't exist!" }
+        }
+
+        return token
+    } catch (error) {
+        return error
+    }
+}
+
 const addNewItemToUser = async (userId, productId, nameOfProduct, token) => {
     try {
         if (token.message) {
@@ -719,5 +747,6 @@ module.exports = {
     askUser,
     getAllChats,
     addMessageToChat,
-    getChatById
+    getChatById,
+    validUserToken
 }

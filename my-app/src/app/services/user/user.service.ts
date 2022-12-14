@@ -27,6 +27,10 @@ export class UserService {
     return this.http.get(this.URL + this.jwtDecode(token)?._id);
   }
 
+  checkUserToken(token: any) {
+    return this.http.get(this.URL + 'checkUserToken/' + token);
+  }
+
   changePicture(data: any) {
     return this.http.put(this.URL + 'changePicture/' + data?.cookie?._id, data);
   }
