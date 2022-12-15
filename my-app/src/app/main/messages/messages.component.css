@@ -53,3 +53,7 @@ div.container div button:hover {
     background-color: green;
     color: white;
 }
+
+div.container div.danger {
+    background-color: rgba(255, 0, 0, 0.514);
+}
