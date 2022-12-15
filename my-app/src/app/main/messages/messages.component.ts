@@ -20,9 +20,6 @@ export class MessagesComponent implements OnInit {
 
     this.userService.getAllMessages(cookie._id).subscribe((res: any) => {
       if (!res.message) {
-        console.log(res);
-
-
         this.messages = res
       }
     })
