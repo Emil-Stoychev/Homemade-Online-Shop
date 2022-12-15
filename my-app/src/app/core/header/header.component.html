@@ -14,6 +14,7 @@
       <div class="email" routerLink="profile" *ngIf="this.appComponent.sessionStorage">
         Welcome, <span>{{this.appComponent.userFromToken?.email}}</span>!
       </div>
+      <li routerLink="messages" *ngIf="this.appComponent.sessionStorage">Messages</li>
       <li routerLink="login" *ngIf="!this.appComponent.sessionStorage">Login</li>
       <li routerLink="register" *ngIf="!this.appComponent.sessionStorage">Register</li>
       <li routerLink="logout" (click)="logoutHandler()" *ngIf="this.appComponent.sessionStorage">Logout</li>
