@@ -7,11 +7,11 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent implements OnInit{
+export class MessagesComponent implements OnInit {
 
   public messages: any = []
 
-  constructor(private userService: UserService, private appComponent: AppComponent) {}
+  constructor(private userService: UserService, private appComponent: AppComponent) { }
 
   ngOnInit() {
 
@@ -19,9 +19,9 @@ export class MessagesComponent implements OnInit{
     let cookie = this.userService.jwtDecode(token)
 
     this.userService.getAllMessages(cookie._id).subscribe((res: any) => {
-      if(!res.message) {
+      if (!res.message) {
         console.log(res);
-        
+
 
         this.messages = res
       }
@@ -38,8 +38,15 @@ export class MessagesComponent implements OnInit{
     }
 
     this.userService.updateMessageStatus(userId, data).subscribe((res: any) => {
-      console.log(res);
-      
+      if (!res.message) {
+        this.messages = this.messages.map((x: any) => {
+          if (x._id == messageId) {
+            x.read = true
+          }
+
+          return x
+        })
+      }
     })
   }
 
