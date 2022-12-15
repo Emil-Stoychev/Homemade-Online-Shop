@@ -49,7 +49,7 @@
   <div class="comments-section">
     <h2>Comments</h2>
 
-    <div class="type">
+    <div class="type" *ngIf="this.appComponent?.sessionStorage" >
       <form [formGroup]="commentForm" (ngSubmit)="onCommentSubmit(commentForm.value)">
         <textarea name="comment" formControlName="comment" cols="30" rows="10"></textarea>
 
@@ -84,9 +84,9 @@
 
           <hr>
           <div class="btns">
-            <button (click)="likeComment(comments?._id)">Like</button>
+            <button (click)="likeComment(comments?._id)" *ngIf="this.appComponent?.sessionStorage">Like</button>
             <p>{{comments?.likes.length}} likes</p>
-            <button *ngIf="isCommentReply == '' && isCommentEdit == ''"
+            <button *ngIf="this.appComponent?.sessionStorage && isCommentReply == '' && isCommentEdit == ''"
               (click)="replyHandler($event, comments?._id)">Reply</button>
 
             <ng-container *ngIf="comments?.authorId == this.appComponent.userFromToken._id">
@@ -121,7 +121,7 @@
 
           <hr>
           <div class="btns">
-            <button (click)="likeNestedComment({nestedComment, comments})">Like</button>
+            <button (click)="likeNestedComment({nestedComment, comments})" *ngIf="this.appComponent?.sessionStorage">Like</button>
             <p>{{nestedComment?.likes.length}} likes</p>
 
             <ng-container *ngIf="nestedComment?.authorId == this.appComponent.userFromToken._id">
