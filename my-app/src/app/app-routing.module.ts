@@ -13,6 +13,7 @@ import { RegisterComponent } from './main/user/register/register.component';
 import { OwnProductsComponent } from './main/ownProducts/ownProducts.component';
 import { LikedProductsComponent } from './main/likedProducts/likedProducts.component';
 import { AuthGuard } from './auth/auth.guard';
+import { MessagesComponent } from './main/messages/messages.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'catalog/edit/:id', component: EditComponent, canActivate: [AuthGuard] },
   { path: 'ownProducts', component: OwnProductsComponent, canActivate: [AuthGuard] },
   { path: 'likedProducts', component: LikedProductsComponent, canActivate: [AuthGuard] },
+  { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: PageNotFoundComponent },

@@ -13,7 +13,7 @@ export class UserService {
 
   private URL: string = `${window.location.protocol}//${window.location.hostname}:3030/users/`
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(userData: object): Observable<IUserLogin[]> {
     return this.http.post<IUserLogin[]>(this.URL + 'login', userData);
@@ -42,6 +42,14 @@ export class UserService {
       },
       body: JSON.stringify(data),
     });
+  }
+
+  getAllMessages(userId: string) {
+    return this.http.get(this.URL + 'messages/' + userId);
+  }
+
+  updateMessageStatus(userId: string, data: any) {
+    return this.http.put(this.URL + 'messages/' + userId + '/changeStatus', data)
   }
 
   loggedIn() {

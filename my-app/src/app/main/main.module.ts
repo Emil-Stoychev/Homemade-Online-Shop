@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import { UserModule } from './user/user.module';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { UserModule } from './user/user.module';
     ProfileComponent,
     DetailsComponent,
     EditComponent,
+    MessagesComponent
   ],
   imports: [CommonModule, UserModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -32,7 +34,8 @@ import { UserModule } from './user/user.module';
     LikedProductsComponent,
     ProfileComponent,
     DetailsComponent,
-    EditComponent
+    EditComponent,
+    MessagesComponent
   ],
 })
 export class MainModule {}
