@@ -10,6 +10,7 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
 export class CatalogComponent implements OnInit {
 
   public products = [] as any;
+  public togglePrice: boolean = false
 
   constructor(private catalogService: CatalogService, private router: Router) {}
 
@@ -21,5 +22,16 @@ export class CatalogComponent implements OnInit {
     this.router.navigate(['/catalog/details/', id])
   }
 
-  
+  sortBy(word: string) {
+    this.togglePrice = !this.togglePrice
+
+    this.products = this.products.sort((a: any, b: any) => {
+      if(this.togglePrice) {
+        return word == 'likes'? a?.[word]?.length - b?.[word]?.length : a?.[word] - b?.[word]
+      } else {
+        return word == 'likes'? b?.[word]?.length - a?.[word]?.length : b?.[word] - a?.[word]
+      }
+    })
+  }
+
 }

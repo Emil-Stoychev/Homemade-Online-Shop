@@ -1,16 +1,23 @@
 <div class="container">
 
-  <div class="card" *ngFor="let product of products">
-    <img
-      src={{product.images[0].dataString}}
-      alt="">
+  <div class="filterBtns">
+    <input type="text" placeholder="Search">
+    <button (click)="sortBy('price')">Sort by Price</button>
+    <button (click)="sortBy('likes')">Sort by Likes</button>
+  </div>
 
-    <h2>{{product.title}}</h2>
+  <div class="allCards">
+    <div class="card" *ngFor="let product of products">
+      <img src={{product?.images[0]?.dataString}} alt="">
 
-    <div class="together">
-      <p>Price: <span>€{{product.price}}</span></p>
+      <h2>{{product?.title}}</h2>
 
-      <button (click)="onSelect(product._id)">See now</button>
+      <div class="together">
+        <p>Price: <span>€{{product?.price}}</span></p>
+        <p>Likes: <span>{{product?.likes?.length}}</span></p>
+
+        <button (click)="onSelect(product._id)">See now</button>
+      </div>
     </div>
   </div>
 
