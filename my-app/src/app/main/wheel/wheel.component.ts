@@ -11,7 +11,7 @@ export class WheelComponent implements OnInit {
   public wheelOption: boolean = false;
   public style = {};
   public surprise: any;
-  public text: string = 'Come again tomorrow!'
+  public text: string = 'Come again tomorrow!';
 
   constructor(
     private appComponent: AppComponent,
@@ -33,7 +33,7 @@ export class WheelComponent implements OnInit {
   spinHandler() {
     this.surprise = '';
     this.wheelOption = false;
-    this.text = 'Good luck!'
+    this.text = 'Good luck!';
     let deg = 0;
 
     deg = Math.floor(5000 + Math.random() * 5000);
@@ -50,9 +50,9 @@ export class WheelComponent implements OnInit {
       wheelResult,
     };
 
-    this.userService.changeWheelStatus(data as object).subscribe((res: any) => {
-      console.log(res);
-    });
+    this.userService
+      .changeWheelStatus(data as object)
+      .subscribe((res: any) => {});
 
     this.style = {
       transition: 'all 10s ease-out',
@@ -67,7 +67,7 @@ export class WheelComponent implements OnInit {
       };
 
       this.surprise = win;
-      this.text = 'Come again tomorrow!'
+      this.text = 'Come again tomorrow!';
     }, 10000);
   }
 
