@@ -284,9 +284,11 @@ export class DetailsComponent implements OnInit {
         if (!res?.message) {
           this.buyBtn = false;
 
-          this.product = res;
+          this.product.author = this.appComponent.userFromToken?._id;
+          this.product.email = this.appComponent.userFromToken?.email;
+          this.product.visible = false;
 
-          this.isAuthor = res?.author == this.appComponent.userFromToken._id;
+          this.isAuthor = res?.author == this.appComponent.userFromToken?._id;
           this.isLiked = res?.likes.includes(
             this.appComponent.userFromToken._id
           );

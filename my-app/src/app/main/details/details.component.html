@@ -60,7 +60,7 @@
 
     </div>
 
-    <div class="all-comments">
+    <div class="all-comments" *ngIf="product?.comments?.length > 0">
 
       <div class="comments" *ngFor="let comments of product?.comments">
 
@@ -85,7 +85,7 @@
           <hr>
           <div class="btns">
             <button (click)="likeComment(comments?._id)" *ngIf="this.appComponent?.sessionStorage">Like</button>
-            <p>{{comments?.likes.length}} likes</p>
+            <p>{{comments?.likes?.length}} likes</p>
             <button *ngIf="this.appComponent?.sessionStorage && isCommentDelete == '' && isCommentReply == '' && isCommentEdit == ''"
               (click)="replyHandler($event, comments?._id)">Reply</button>
 
@@ -131,7 +131,7 @@
           <div class="btns">
             <button (click)="likeNestedComment({nestedComment, comments})"
               *ngIf="this.appComponent?.sessionStorage">Like</button>
-            <p>{{nestedComment?.likes.length}} likes</p>
+            <p>{{nestedComment?.likes?.length}} likes</p>
 
             <ng-container *ngIf="nestedComment?.authorId == this.appComponent.userFromToken._id">
               <button *ngIf="isCommentDelete == '' && isCommentEdit == '' && isCommentReply == ''"
