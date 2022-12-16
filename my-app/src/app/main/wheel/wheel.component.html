@@ -1,16 +1,14 @@
 <div class="container">
   <h1>Daily wheel!</h1>
   <div class="wheel">
-    <img class="wheel img-fluid rounded mx-auto d-block" src="../../../assets/images/wheel.png" alt='image not found' />
+    <img [style]="style" class="wheel img-fluid rounded mx-auto d-block" src="../../../assets/images/wheel.png" alt='image not found' />
     <img class="marker img-fluid rounded mx-auto d-block" src='../../../assets/images/marker.png'
       alt='image not found' />
 
-    <h1 class="congrats">Congrats: €</h1>
+    <h1 *ngIf="surprise" class="congrats">Congrats: {{surprise}}€</h1>
 
-    <!-- {wheelOption
-                    ? <img class="button" src={buttonImage} onClick={spinHandler} alt='image not found' />
-                    : <h1>Come again tomorrow!</h1>
-                } -->
+    <img *ngIf="wheelOption" class="button" src="../../../assets/images/button.png" (click)="spinHandler()" alt='image not found' />
+    <h1 *ngIf="!wheelOption">{{text}}</h1>
   </div>
 
   <h1 class="possiblePrices">Possible prices</h1>

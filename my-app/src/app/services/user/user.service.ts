@@ -52,6 +52,14 @@ export class UserService {
     return this.http.put(this.URL + 'messages/' + userId + '/changeStatus', data)
   }
 
+  getWheelStatus(userId: string) {
+    return this.http.get(this.URL + '/getWheelStatus/' + userId)
+  }
+
+  changeWheelStatus(data: any) {
+    return this.http.put(this.URL + '/changeWheelStatus/' + data?._id, data)
+  }
+
   loggedIn() {
     return !!localStorage.getItem('sessionStorage');
   }

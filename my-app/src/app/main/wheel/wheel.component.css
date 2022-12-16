@@ -20,21 +20,23 @@ div.container {
     margin: 3% 0 2% 0;
     font-family: "Copperplate Gothic";
     user-select: none;
-    color: navajowhite;
+    color: rgba(214, 146, 45, 0.863);
   }
 
   div.container h1.possiblePrices {
-    margin: 5% 0 1% 0;
+    margin: 5% 0 3% 0;
   }
 
   div.container div.wheel img:nth-child(2) {
     margin: 0 auto;
     margin-top: -6%;
+    z-index: 20;
   }
 
   div.container div.row {
     user-select: none;
     display: flex;
+    justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem;

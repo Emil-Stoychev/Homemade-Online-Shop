@@ -1,128 +1,136 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-wheel',
   templateUrl: './wheel.component.html',
-  styleUrls: ['./wheel.component.css']
+  styleUrls: ['./wheel.component.css'],
 })
 export class WheelComponent implements OnInit {
+  public wheelOption: boolean = false;
+  public style = {};
+  public surprise: any;
+  public text: string = 'Come again tomorrow!'
 
-  constructor(private appComponent: AppComponent) { }
+  constructor(
+    private appComponent: AppComponent,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     // window.onload = window.scrollTo(0, 0)
-    console.log('wheel component rendered');
-    
+    let token = localStorage.getItem('sessionStorage');
+    let userId = this.userService.jwtDecode(token as string);
+
+    this.userService.getWheelStatus(userId?._id).subscribe((res: any) => {
+      if (!res.message) {
+        this.wheelOption = res.option;
+      }
+    });
   }
 
   spinHandler() {
+    this.surprise = '';
+    this.wheelOption = false;
+    this.text = 'Good luck!'
     let deg = 0;
 
     deg = Math.floor(5000 + Math.random() * 5000);
 
-    let wheelResult = this.getWheelResult(deg)
+    let wheelResult = this.getWheelResult(deg);
 
-    let surprise = this.getWheelSurprise(wheelResult)
+    let win = this.getWheelSurprise(wheelResult);
 
-    let cookie = localStorage.getItem('sessionStorage')
+    let data = {
+      cookie: {
+        token: localStorage.getItem('sessionStorage'),
+        _id: this.appComponent?.userFromToken?._id,
+      },
+      wheelResult,
+    };
 
-    // authService.changeWheelStatus(cookie, wheelResult)
-    //   .then(result => {
-    //     if (result.message) {
+    this.userService.changeWheelStatus(data as object).subscribe((res: any) => {
+      console.log(res);
+    });
 
-    //     } else {
-    //       let sessionCookie = cookie
-    //       sessionCookie.money = Number(result.money)
+    this.style = {
+      transition: 'all 10s ease-out',
+      transform: `rotate(${deg}deg)`,
+      filter: 'blur(1px)',
+    };
 
-    //       setCookies(sessionCookie)
-    //     }
-    //     setWheelOption(false)
-    //   })
+    setTimeout(() => {
+      this.style = {
+        transform: `rotate(${deg}deg)`,
+        filter: 'blur(0)',
+      };
 
-    // setStyles({
-    //   transition: 'all 10s ease-out',
-    //   transform: `rotate(${deg}deg)`,
-    //   filter: "blur(1px)"
-    // })
-
-    // setTimeout(() => {
-    //   setStyles(state => ({
-    //     ...state,
-    //     ['filter']: "blur(2px)"
-    //   }))
-    // }, 8000)
-
-    // setTimeout(() => {
-    //   setStyles({
-    //     transform: `rotate(${deg}deg)`,
-    //     filter: "blur(0)"
-    //   })
-
-    //   setSurprise(surprise)
-    // }, 10000)
+      this.surprise = win;
+      this.text = 'Come again tomorrow!'
+    }, 10000);
   }
 
   getWheelResult(deg: any) {
     const actualDeg = deg % 360;
-    let word = ''
+    let word = '';
 
     if (actualDeg >= 0 && actualDeg <= 45) {
-      word = "Heart"
+      word = 'Heart';
     } else if (actualDeg >= 46 && actualDeg <= 90) {
-      word = 'Kiss'
+      word = 'Kiss';
     } else if (actualDeg >= 91 && actualDeg <= 135) {
-      word = "Moon"
+      word = 'Moon';
     } else if (actualDeg >= 136 && actualDeg <= 180) {
-      word = "Star"
+      word = 'Star';
     } else if (actualDeg >= 181 && actualDeg <= 225) {
-      word = "Cloud"
+      word = 'Cloud';
     } else if (actualDeg >= 226 && actualDeg <= 270) {
-      word = "Hipnosa"
+      word = 'Hipnosa';
     } else if (actualDeg >= 271 && actualDeg <= 315) {
-      word = "Rainbow"
+      word = 'Rainbow';
     } else if (actualDeg >= 316 && actualDeg <= 360) {
-      word = "Lollipop"
+      word = 'Lollipop';
     }
 
-    return word
+    return word;
   }
 
   getWheelSurprise(word: any) {
-    let num = 0
+    let num = 0;
 
-    if (word === "Heart") {
-      num = 25
+    if (word === 'Heart') {
+      num = 25;
     }
 
-    if (word === "Kiss") {
-      num = 15
+    if (word === 'Kiss') {
+      num = 15;
     }
 
-    if (word === "Moon") {
-      num = 10
+    if (word === 'Moon') {
+      num = 10;
     }
 
-    if (word === "Star") {
-      num = 100
+    if (word === 'Star') {
+      num = 100;
     }
 
-    if (word === "Cloud") {
-      num = 35
+    if (word === 'Cloud') {
+      num = 35;
     }
 
-    if (word === "Hipnosa") {
-      num = 50
+    if (word === 'Hipnosa') {
+      num = 50;
     }
 
-    if (word === "Rainbow") {
-      num = 40
+    if (word === 'Rainbow') {
+      num = 40;
     }
 
-    if (word === "Lollipop") {
-      num = 30
+    if (word === 'Lollipop') {
+      num = 30;
     }
 
-    return num
+    return num;
   }
 }
