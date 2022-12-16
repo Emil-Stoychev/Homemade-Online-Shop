@@ -1,7 +1,7 @@
 <div class="container">
 
     <div *ngFor="let message of messages" class="{{!message.read ? 'danger' : ''}}">
-        <h4 class="alert-heading">{{message.title.includes('deleted') ? 'DELETED PRODUCT' : message.title.includes('edited') ? 'EDITED PRODUCT' : message.title.includes('created') ? 'CREATED PRODUCT' : message.title.includes('have purchased') ? 'PURCHASED NEW PRODUCT' : message.title.includes('was purchased') ? 'PRODUCT SOLD' : message.title.includes('surprice from Daily Wheel') ? "DAILY WHEEL" : ''}}!</h4>
+        <h4 class="alert-heading">{{message.title.includes('deleted') ? 'DELETED PRODUCT' : message.title.includes('edited') ? 'EDITED PRODUCT' : message.title.includes('created') ? 'CREATED PRODUCT' : message.title.includes('have purchased') ? 'PURCHASED NEW PRODUCT' : message.title.includes('was purchased') ? 'PRODUCT SOLD' : message.title.includes('surprise from Daily Wheel') ? "DAILY WHEEL" : ''}}!</h4>
         <p>{{message.title}}</p>
         <hr />
         <p class="mb-0">Date: {{message.date}}</p>
