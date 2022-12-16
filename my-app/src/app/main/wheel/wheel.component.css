@@ -1,5 +1,5 @@
 div.container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     min-height: 100vh;
     padding-top: 7%;
@@ -29,7 +29,7 @@ div.container {
 
   div.container div.wheel img:nth-child(2) {
     margin: 0 auto;
-    margin-top: -6%;
+    margin-top: -5%;
     z-index: 20;
   }
 
@@ -37,6 +37,7 @@ div.container {
     user-select: none;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem;
@@ -54,6 +55,7 @@ div.container {
     box-shadow: 10px 10px 7px 0px rgba(0,0,0,0.75);
     color: white;
     transition: all 300ms ease-in-out;
+    width: 20%;
   }
 
   div.container div.row  div.card:hover {
