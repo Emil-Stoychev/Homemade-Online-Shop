@@ -14,6 +14,7 @@ import { OwnProductsComponent } from './main/ownProducts/ownProducts.component';
 import { LikedProductsComponent } from './main/likedProducts/likedProducts.component';
 import { AuthGuard } from './auth/auth.guard';
 import { MessagesComponent } from './main/messages/messages.component';
+import { WheelComponent } from './main/wheel/wheel.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'ownProducts', component: OwnProductsComponent, canActivate: [AuthGuard] },
   { path: 'likedProducts', component: LikedProductsComponent, canActivate: [AuthGuard] },
   { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard] },
+  { path: 'wheel', component: WheelComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: PageNotFoundComponent },

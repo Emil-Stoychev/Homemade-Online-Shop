@@ -1,0 +1,100 @@
+div.container {
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-top: 7%;
+    margin-bottom: 10%;
+  }
+
+  div.container div.wheel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  div.container h1,
+  div.container h1.congrats,
+  div.container h1.possiblePrices {
+    text-align: center;
+    margin: 3% 0 2% 0;
+    font-family: "Copperplate Gothic";
+    user-select: none;
+    color: navajowhite;
+  }
+
+  div.container h1.possiblePrices {
+    margin: 5% 0 1% 0;
+  }
+
+  div.container div.wheel img:nth-child(2) {
+    margin: 0 auto;
+    margin-top: -6%;
+  }
+
+  div.container div.row {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  div.container div.row  div.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(128, 128, 128, 0.462);
+    padding: 1rem;
+    border-radius: 10%;
+    box-shadow: 10px 10px 7px 0px rgba(0,0,0,0.75);
+    color: white;
+    transition: all 300ms ease-in-out;
+  }
+
+  div.container div.row  div.card:hover {
+    transform: scale(1.2);
+  }
+
+  div.container div.row img.rounded-circle {
+    width: 120px;
+    height: 120px;
+  }
+  
+  /* .marker {
+    position: absolute;
+    width: 60px;
+    left: 172px;
+    top: -20px;
+    z-index: 2;
+  } */
+  
+  .button {
+    display: block;
+    width: 250px;
+    margin: 40px auto;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    opacity: 0.8;
+  }
+  
+  .blur {
+    animation: blur 10s;
+  }
+  
+  @keyframes blur {
+    0% {
+      filter: blur(1.5px);
+    }
+    80% {
+      filter: blur(1.5px);
+    }
+    100% {
+      filter: blur(0px);
+    }
+  }
+  

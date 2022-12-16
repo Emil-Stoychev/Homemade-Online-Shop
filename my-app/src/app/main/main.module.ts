@@ -12,6 +12,7 @@ import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import { UserModule } from './user/user.module';
 import { MessagesComponent } from './messages/messages.component';
+import { WheelComponent } from './wheel/wheel.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MessagesComponent } from './messages/messages.component';
     ProfileComponent,
     DetailsComponent,
     EditComponent,
-    MessagesComponent
+    MessagesComponent,
+    WheelComponent
   ],
   imports: [CommonModule, UserModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -35,7 +37,8 @@ import { MessagesComponent } from './messages/messages.component';
     ProfileComponent,
     DetailsComponent,
     EditComponent,
-    MessagesComponent
+    MessagesComponent,
+    WheelComponent
   ],
 })
 export class MainModule {}
