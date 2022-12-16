@@ -3,7 +3,7 @@
   <div class="card" *ngIf="product.title">
     <div class="image">
       <img src={{product?.images[imageCount]?.dataString}} alt="">
-      <div class="sliders">
+      <div class="sliders" *ngIf="product?.images?.length > 1" >
         <button (click)="previousImage()">
           <</button> <button (click)="nextImage()">>
         </button>

@@ -29,9 +29,10 @@ div.container .card div.image {
 }
 
 div.container .card div.image img {
-    padding: 5rem;
-    min-height: 600px;
+    padding: 1rem;
+    min-height: 200px;
     max-height: 600px;
+    max-width: 450px;
 }
 
 div.container .card div.image .sliders {
@@ -41,16 +42,16 @@ div.container .card div.image .sliders {
     position: absolute;
     margin: 0 auto;
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 7.5rem;
     left: 0;
     top: 0;
 }
 
 div.container .card div.image .sliders button {
-    width: 24px;
-    height: 100px;
+    width: 32px;
+    height: 75px;
     border: none;
-    background-color: rgba(16, 105, 189, 0.842);
+    background-color: rgba(143, 172, 199, 0.842);
     color: white;
     font-weight: 900;
     transition: all 200ms ease-in-out;
@@ -58,7 +59,8 @@ div.container .card div.image .sliders button {
 }
 
 div.container .card div.image .sliders button:hover {
-    transform: scale(1.1);
+    background-color: rgba(16, 105, 189, 0.842);
+    transform: scale(1.2);
 }
 
 div.container .card div.image .sliders button:first-child {
@@ -80,11 +82,12 @@ div.container .card div.details {
 
 div.container .card div.details p {
     width: 70%;
+    font-size: 20px;
 }
 
 div.container .card div.details p span {
     font-weight: 900;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 div.container .card div.details div.btns {
@@ -93,7 +96,7 @@ div.container .card div.details div.btns {
 }
 
 div.container .card div.details div.btns button {
-    padding: 0.2rem 1rem;
+    padding: 0.4rem 1rem;
     font-weight: 900;
     border-radius: 1rem;
     border: none;
