@@ -30,6 +30,8 @@ div.container .card div.image {
 
 div.container .card div.image img {
     padding: 5rem;
+    min-height: 600px;
+    max-height: 600px;
 }
 
 div.container .card div.image .sliders {

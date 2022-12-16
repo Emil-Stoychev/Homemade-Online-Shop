@@ -27,6 +27,15 @@ export class CatalogService {
     return this.http.put(this.URL + 'catalog/editComment/' + data?.commentId, data)
   }
 
+  deleteComment(data: any) {
+    return this.http.delete(this.URL + 'catalog/' + data?.option + '/' + data?.commentId, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
   replyToComment(data: any) {
     return this.http.put(this.URL + 'catalog/addReplyComment/' + data?.commentId, data)
   }

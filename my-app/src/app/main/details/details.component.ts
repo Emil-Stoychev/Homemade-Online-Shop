@@ -21,6 +21,7 @@ export class DetailsComponent implements OnInit {
   public deleteBtn: boolean = false;
   public isCommentReply: string = '';
   public isCommentEdit: string = '';
+  public isCommentDelete: string = '';
   public buyBtn: boolean = false;
 
   public commentForm = new FormGroup({
@@ -40,8 +41,6 @@ export class DetailsComponent implements OnInit {
 
     this.detailsProduct.getProducts(id).subscribe((data: any) => {
       this.product = data;
-
-      console.log(data);
 
       this.isAuthor = data?.author == this.appComponent.userFromToken._id;
       this.isLiked = data?.likes.includes(this.appComponent.userFromToken._id);
@@ -305,6 +304,54 @@ export class DetailsComponent implements OnInit {
           }
         }
       });
+  }
+
+  deleteComment(e: any, commentId: any) {
+    this.isCommentDelete = commentId;
+  }
+
+  onDeleteCommentHandler(
+    e: any,
+    commentId: any,
+    option: string,
+    parentId: string
+  ) {
+    this.isCommentDelete = '';
+
+    let data: any = {
+      cookie: {
+        token: this.appComponent.sessionStorage,
+        _id: this.appComponent.userFromToken?._id,
+      },
+      option,
+    };
+
+    if (option == 'deleteNestedComment') {
+      data.nestedCommentId = commentId;
+      data.parentId = parentId;
+    } else {
+      data.commentId = commentId;
+    }
+
+    this.catalogService.deleteComment(data).subscribe((res: any) => {
+      if (!res.message) {
+        if (option == 'deleteNestedComment') {
+          this.product.comments = this.product.comments.map((x: any) => {
+            if (x.nestedComments.length > 0) {
+              x.nestedComments = x.nestedComments.filter(
+                (x: any) => x._id != res._id
+              );
+            }
+
+            return x;
+          });
+        } else {
+          this.product.comments = this.product.comments.filter(
+            (x: any) => x._id != res._id
+          );
+        }
+      }
+    });
   }
 
   onDeleteHandler() {

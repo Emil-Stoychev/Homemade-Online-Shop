@@ -86,13 +86,20 @@
           <div class="btns">
             <button (click)="likeComment(comments?._id)" *ngIf="this.appComponent?.sessionStorage">Like</button>
             <p>{{comments?.likes.length}} likes</p>
-            <button *ngIf="this.appComponent?.sessionStorage && isCommentReply == '' && isCommentEdit == ''"
+            <button *ngIf="this.appComponent?.sessionStorage && isCommentDelete == '' && isCommentReply == '' && isCommentEdit == ''"
               (click)="replyHandler($event, comments?._id)">Reply</button>
 
             <ng-container *ngIf="comments?.authorId == this.appComponent.userFromToken._id">
-              <button *ngIf="isCommentEdit == '' && isCommentReply == ''"
+              <button *ngIf="isCommentDelete == '' && isCommentEdit == '' && isCommentReply == ''"
                 (click)="editComment($event, comments?._id)">Edit</button>
+              <button *ngIf="isCommentDelete == '' && isCommentEdit == '' && isCommentReply == ''"
+                (click)="deleteComment($event, comments?._id)">Delete</button>
             </ng-container>
+
+            <div *ngIf="isCommentDelete == comments?._id">
+              <button (click)="onDeleteCommentHandler($event, comments?._id, 'deleteComment', '')">Yes</button>
+              <button (click)="isCommentDelete = ''">No</button>
+            </div>
           </div>
 
           <div *ngIf="isCommentReply == comments?._id">
@@ -127,9 +134,16 @@
             <p>{{nestedComment?.likes.length}} likes</p>
 
             <ng-container *ngIf="nestedComment?.authorId == this.appComponent.userFromToken._id">
-              <button *ngIf="isCommentEdit == '' && isCommentReply == ''"
+              <button *ngIf="isCommentDelete == '' && isCommentEdit == '' && isCommentReply == ''"
                 (click)="editComment($event, nestedComment?._id)">Edit</button>
+              <button *ngIf="isCommentDelete == '' && isCommentEdit == '' && isCommentReply == ''"
+                (click)="deleteComment($event, nestedComment?._id)">Delete</button>
             </ng-container>
+
+            <div *ngIf="isCommentDelete == nestedComment?._id">
+              <button (click)="onDeleteCommentHandler($event, nestedComment?._id, 'deleteNestedComment', comments?._id)">Yes</button>
+              <button (click)="isCommentDelete = ''">No</button>
+            </div>
           </div>
         </div>
 
