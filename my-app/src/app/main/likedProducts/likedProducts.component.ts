@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class LikedProductsComponent implements OnInit {
   public products: any = [];
-  public errors: any = [];
+  public emptyProducts: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -25,19 +25,19 @@ export class LikedProductsComponent implements OnInit {
   ngOnInit() {
     this.vps.scrollToPosition([0, 0]);
 
-    this.userService
-      .getProfile(this.appComponent.sessionStorage)
-      .subscribe((data: any) => {
-        this.catalogService
-          .getLikedProducts(data._id)
-          .subscribe((data: any) => {
-            if (data?.message) {
-              this.errors = data;
-            } else {
-              this.products = data;
-            }
-          });
+    let token = localStorage.getItem('sessionStorage');
+
+    this.userService.getProfile(token as string).subscribe((data: any) => {
+      this.catalogService.getLikedProducts(data._id).subscribe((data: any) => {
+        if (data?.length == 0 || data.message == 'Empty!') {
+          this.emptyProducts = true;
+
+          return;
+        }
+
+        this.products = data;
       });
+    });
   }
 
   onSelect(id: string) {

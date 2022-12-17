@@ -13,6 +13,7 @@ export class CatalogComponent implements OnInit {
   public defaultProducts = [] as any;
   public searchProducts = [] as any;
   public toggleSort: boolean = false;
+  public emptyProducts: boolean = false;
 
   constructor(
     private catalogService: CatalogService,
@@ -21,13 +22,18 @@ export class CatalogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.catalogService
-      .getProducts()
-      .subscribe(
-        (data) => ((this.products = data), (this.defaultProducts = data))
-      );
-
     this.vps.scrollToPosition([0, 0]);
+
+    this.catalogService.getProducts().subscribe((data) => {
+      if (data.length == 0) {
+        this.emptyProducts = true;
+
+        return;
+      }
+
+      this.products = data;
+      this.defaultProducts = data;
+    });
   }
 
   onSelect(id: string) {

@@ -2,6 +2,10 @@
 
   <h1>Welcome to our website!</h1>
 
+  <h2 class="mainHeader" *ngIf="emptyProducts">No products yet!</h2>
+
+  <div *ngIf="!emptyProducts && products?.length == 0" class="loading">Loading&#8230;</div>
+
   <section>
 
     <article *ngFor="let product of products">
@@ -11,6 +15,34 @@
       <h3>{{product.title}}</h3>
       <button (click)="onSelect(product._id)">View</button>
     </article>
+
+    <ng-container *ngIf="!emptyProducts && products?.length == 0">
+
+      <article class="fixedA blur">
+        <img
+          src=''
+          alt="Loading...">
+        <h3>Example title</h3>
+        <button>View</button>
+      </article>
+
+      <article class="fixedB blur">
+        <img
+          src=''
+          alt="Loading...">
+        <h3>Example title</h3>
+        <button>View</button>
+      </article>
+
+      <article class="fixedA blur">
+        <img
+          src=''
+          alt="Loading...">
+        <h3>Example title</h3>
+        <button>View</button>
+      </article>
+
+    </ng-container>
 
   </section>
 

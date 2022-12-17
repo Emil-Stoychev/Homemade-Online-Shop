@@ -10,6 +10,7 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
 })
 export class HomeComponent {
   public products = [] as any;
+  public emptyProducts: boolean = false;
 
   constructor(
     private catalogService: CatalogService,
@@ -18,9 +19,15 @@ export class HomeComponent {
   ) {}
 
   ngOnInit() {
-    this.catalogService
-      .getProducts()
-      .subscribe((data) => (this.products = data.slice(0, 3)));
+    this.catalogService.getProducts().subscribe((data) => {
+      if (data.length == 0) {
+        this.emptyProducts = true;
+
+        return;
+      }
+
+      this.products = data.slice(0, 3);
+    });
 
     this.vps.scrollToPosition([0, 0]);
   }

@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class OwnProductsComponent implements OnInit {
   public products: any = [];
-  public errors: any = [];
+  public emptyProducts: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -24,16 +24,20 @@ export class OwnProductsComponent implements OnInit {
 
   ngOnInit() {
     this.vps.scrollToPosition([0, 0]);
-    
+
+    let token = localStorage.getItem('sessionStorage')
+
     this.userService
-      .getProfile(this.appComponent.sessionStorage)
+      .getProfile(token as string)
       .subscribe((data: any) => {
         this.catalogService.getOwnProducts(data._id).subscribe((data: any) => {
-          if (data?.message) {
-            this.errors = data;
-          } else {
-            this.products = data;
+          if (data?.length == 0 || data.message == 'Empty!') {
+            this.emptyProducts = true;
+
+            return;
           }
+
+          this.products = data;
         });
       });
   }

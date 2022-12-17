@@ -1,21 +1,79 @@
 <div class="container">
 
-  <ng-container *ngIf="products.length > 0">
+  <ng-container *ngIf="products?.length > 0">
     <div class="card" *ngFor="let product of products">
-      <img
-      src="{{product?.images[0]?.dataString}}"
-      alt="{{product?.images[0]?.name}}">
-      
+      <img src="{{product?.images[0]?.dataString}}" alt="{{product?.images[0]?.name}}">
+
       <h2>{{product?.title}}</h2>
-      
+
       <div class="together">
         <p>Price: <span>€{{product?.price}}</span></p>
-        
+
         <button (click)="onSelect(product._id)">See now</button>
       </div>
     </div>
   </ng-container>
 
-  <h1 *ngIf="errors.message">You don't have own products yet!</h1>
+  <h1 *ngIf="emptyProducts">You don't have own products yet!</h1>
+
+  <div *ngIf="!emptyProducts && products?.length == 0" class="loading">Loading&#8230;</div>
+
+  <ng-container disabled *ngIf="!emptyProducts && products?.length == 0">
+    <div class="card  blur">
+
+      <img src='' alt="Loading..">
+
+      <h2>Example title</h2>
+
+      <div class="together">
+        <p>Price: <span>€7</span></p>
+        <p>Likes: <span>7</span></p>
+
+        <button>See now</button>
+      </div>
+    </div>
+
+    <div class="card  blur">
+
+      <img src='' alt="Loading..">
+
+      <h2>Example title</h2>
+
+      <div class="together">
+        <p>Price: <span>€7</span></p>
+        <p>Likes: <span>7</span></p>
+
+        <button>See now</button>
+      </div>
+    </div>
+
+    <div class="card  blur">
+
+      <img src='' alt="Loading..">
+
+      <h2>Example title</h2>
+
+      <div class="together">
+        <p>Price: <span>€7</span></p>
+        <p>Likes: <span>7</span></p>
+
+        <button>See now</button>
+      </div>
+    </div>
+
+    <div class="card  blur">
+
+      <img src='' alt="Loading..">
+
+      <h2>Example title</h2>
+
+      <div class="together">
+        <p>Price: <span>€7</span></p>
+        <p>Likes: <span>7</span></p>
+
+        <button>See now</button>
+      </div>
+    </div>
+  </ng-container>
 
 </div>

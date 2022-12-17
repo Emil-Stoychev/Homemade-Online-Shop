@@ -3,7 +3,7 @@
   <div class="card" *ngIf="product.title">
     <div class="image">
       <img src={{product?.images[imageCount]?.dataString}} alt="">
-      <div class="sliders" *ngIf="product?.images?.length > 1" >
+      <div class="sliders" *ngIf="product?.images?.length > 1">
         <button (click)="previousImage()">
           <</button> <button (click)="nextImage()">>
         </button>
@@ -46,10 +46,31 @@
     </div>
   </div>
 
-  <div class="comments-section">
-    <h2>Comments</h2>
+  <div *ngIf="!product?.title && product?.length == 0" class="loading">Loading&#8230;</div>
 
-    <div class="type" *ngIf="this.appComponent?.sessionStorage">
+  <!-- Loading example -->
+  <div class="card blur" *ngIf="!product?.title">
+    <div class="image">
+      <img src='' alt="Loading...">
+    </div>
+
+    <div class="details">
+      <h2>Example title</h2>
+
+      <p>Desc: Example description here</p>
+
+      <p>Category: Example category</p>
+
+      <p>Price: <span>€ 7</span></p>
+
+      <p>Likes: 7</p>
+    </div>
+  </div>
+
+  <div class="comments-section">
+    <h2 *ngIf="product?.title">Comments</h2>
+
+    <div class="type" *ngIf="this.appComponent?.sessionStorage && product?.title">
       <form [formGroup]="commentForm" (ngSubmit)="onCommentSubmit(commentForm.value)">
         <textarea name="comment" formControlName="comment" cols="30" rows="10"></textarea>
 
@@ -86,7 +107,8 @@
           <div class="btns">
             <button (click)="likeComment(comments?._id)" *ngIf="this.appComponent?.sessionStorage">Like</button>
             <p>{{comments?.likes?.length}} likes</p>
-            <button *ngIf="this.appComponent?.sessionStorage && isCommentDelete == '' && isCommentReply == '' && isCommentEdit == ''"
+            <button
+              *ngIf="this.appComponent?.sessionStorage && isCommentDelete == '' && isCommentReply == '' && isCommentEdit == ''"
               (click)="replyHandler($event, comments?._id)">Reply</button>
 
             <ng-container *ngIf="comments?.authorId == this.appComponent.userFromToken._id">
@@ -141,7 +163,8 @@
             </ng-container>
 
             <div *ngIf="isCommentDelete == nestedComment?._id">
-              <button (click)="onDeleteCommentHandler($event, nestedComment?._id, 'deleteNestedComment', comments?._id)">Yes</button>
+              <button
+                (click)="onDeleteCommentHandler($event, nestedComment?._id, 'deleteNestedComment', comments?._id)">Yes</button>
               <button (click)="isCommentDelete = ''">No</button>
             </div>
           </div>
