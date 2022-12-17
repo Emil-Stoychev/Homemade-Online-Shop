@@ -1,13 +1,17 @@
 <div class="container">
 
   <div class="filterBtns">
-    <input type="text" placeholder="Search">
+    <div class="search">
+      <input type="text" placeholder="Search">
+      <button (click)="searchHandler($event)">&#8981;</button>
+    </div>
     <button (click)="sortBy('price')">Sort by Price</button>
     <button (click)="sortBy('likes')">Sort by Likes</button>
   </div>
 
   <div class="allCards">
     <div class="card" *ngFor="let product of products">
+
       <img src={{product?.images[0]?.dataString}} alt="">
 
       <h2>{{product?.title}}</h2>
@@ -19,6 +23,7 @@
         <button (click)="onSelect(product._id)">See now</button>
       </div>
     </div>
+
   </div>
 
 </div>
