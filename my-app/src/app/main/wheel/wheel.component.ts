@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { UserService } from 'src/app/services/user/user.service';
@@ -15,11 +16,13 @@ export class WheelComponent implements OnInit {
 
   constructor(
     private appComponent: AppComponent,
-    private userService: UserService
+    private userService: UserService,
+    private vps: ViewportScroller
   ) {}
 
   ngOnInit() {
-    // window.onload = window.scrollTo(0, 0)
+    this.vps.scrollToPosition([0, 0]);
+
     let token = localStorage.getItem('sessionStorage');
     let userId = this.userService.jwtDecode(token as string);
 

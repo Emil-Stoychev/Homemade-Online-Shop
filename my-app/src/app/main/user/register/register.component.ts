@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
@@ -8,14 +9,14 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   public userRegisterGroup = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
     rePassword: new FormControl(''),
   });
-  
-  public errors: string = ''
+
+  public errors: string = '';
   public imageTypes: string[] = [
     'image/png',
     'image/jpeg',
@@ -26,19 +27,27 @@ export class RegisterComponent {
 
   public res = [] as any;
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private vps: ViewportScroller
+  ) {}
+
+  ngOnInit() {
+    this.vps.scrollToPosition([0, 0]);
+  }
 
   goToLogin() {
     this.router.navigate(['/login']);
   }
 
   onSubmit(userRegisterGroup: any) {
-    userRegisterGroup.image = this.allImages[0]?.dataString || ''
+    userRegisterGroup.image = this.allImages[0]?.dataString || '';
 
     this.userService.register(userRegisterGroup).subscribe((data) => {
-      this.res = data
+      this.res = data;
 
-      if(!this.res.message) {
+      if (!this.res.message) {
         this.router.navigate(['/login']);
       }
     });
@@ -60,46 +69,50 @@ export class RegisterComponent {
         date,
         dataString: base64,
       };
-      
-        if (this.allImages.some((x: any) => x.dataString == imageData.dataString)) {
-            if (this.errors !== 'This image already exist!') {
-                this.errors = 'This image already exist!'
 
-                setTimeout(() => {
-                  this.errors = ''
-                }, 2000);
-            }
-        } else {
-            if(this.allImages.length > 0) {
-                if (this.errors !== 'You cannot upload more than 1 image!') {
-                  this.errors = 'You cannot upload more than 1 image!'
+      if (
+        this.allImages.some((x: any) => x.dataString == imageData.dataString)
+      ) {
+        if (this.errors !== 'This image already exist!') {
+          this.errors = 'This image already exist!';
 
-                    setTimeout(() => {
-                      this.errors = ''
-                    }, 2000);
-                }
-            } else {
-              this.allImages.push(imageData)
-            }
+          setTimeout(() => {
+            this.errors = '';
+          }, 2000);
         }
-    } else {
-        if (this.errors !== 'File must be a image!') {
-          this.errors = 'File must be a image!'
+      } else {
+        if (this.allImages.length > 0) {
+          if (this.errors !== 'You cannot upload more than 1 image!') {
+            this.errors = 'You cannot upload more than 1 image!';
 
             setTimeout(() => {
-              this.errors = ''
+              this.errors = '';
             }, 2000);
+          }
+        } else {
+          this.allImages.push(imageData);
         }
+      }
+    } else {
+      if (this.errors !== 'File must be a image!') {
+        this.errors = 'File must be a image!';
+
+        setTimeout(() => {
+          this.errors = '';
+        }, 2000);
+      }
     }
 
-    e.value = null
+    e.value = null;
   }
 
   removeImage = (e: any) => {
-    let currImage = e.parentElement.childNodes[0].src
+    let currImage = e.parentElement.childNodes[0].src;
 
-    this.allImages = this.allImages.filter((x: any) => x.dataString != currImage)
-}
+    this.allImages = this.allImages.filter(
+      (x: any) => x.dataString != currImage
+    );
+  };
 
   convertBase64 = (file: any) => {
     return new Promise((resolve, reject) => {

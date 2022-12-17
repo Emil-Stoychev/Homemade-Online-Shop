@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
@@ -17,26 +18,27 @@ export class OwnProductsComponent implements OnInit {
     private userService: UserService,
     private appComponent: AppComponent,
     private catalogService: CatalogService,
-    private router: Router
+    private router: Router,
+    private vps: ViewportScroller
   ) {}
 
   ngOnInit() {
+    this.vps.scrollToPosition([0, 0]);
+    
     this.userService
       .getProfile(this.appComponent.sessionStorage)
       .subscribe((data: any) => {
-        this.catalogService
-          .getOwnProducts(data._id)
-          .subscribe((data: any) => {
-            if (data?.message) {
-              this.errors = data
-            } else {
-              this.products = data;
-            }
-          });
+        this.catalogService.getOwnProducts(data._id).subscribe((data: any) => {
+          if (data?.message) {
+            this.errors = data;
+          } else {
+            this.products = data;
+          }
+        });
       });
   }
 
   onSelect(id: string) {
-    this.router.navigate(['/catalog/details/', id])
+    this.router.navigate(['/catalog/details/', id]);
   }
 }

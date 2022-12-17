@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,7 +34,8 @@ export class DetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public appComponent: AppComponent,
-    private catalogService: CatalogService
+    private catalogService: CatalogService,
+    private vps: ViewportScroller
   ) {}
 
   ngOnInit() {
@@ -48,6 +50,8 @@ export class DetailsComponent implements OnInit {
       if (this.isAuthor) {
         this.isVisible = data?.visible;
       }
+
+      this.vps.scrollToPosition([0, 0]);
     });
   }
 

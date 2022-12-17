@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { AppComponent } from 'src/app/app.component';
 import { CatalogService } from 'src/app/services/catalog/catalog.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css'],
 })
-export class CreateComponent {
+export class CreateComponent implements OnInit {
   public createFormGroup = new FormGroup({
     title: new FormControl(''),
     description: new FormControl(''),
@@ -33,8 +34,13 @@ export class CreateComponent {
     private router: Router,
     private route: ActivatedRoute,
     private catalogService: CatalogService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private vps: ViewportScroller
   ) {}
+
+  ngOnInit() {
+    this.vps.scrollToPosition([0, 0]);
+  }
 
   onSubmit(createFormGroup: any) {
     let id = this.route.snapshot.params['id'];
@@ -53,16 +59,18 @@ export class CreateComponent {
 
     dataForm.productId = id;
 
-    this.catalogService.createProduct(createFormGroup).subscribe((data: any) => {
-      this.res = data;
+    this.catalogService
+      .createProduct(createFormGroup)
+      .subscribe((data: any) => {
+        this.res = data;
 
-      if (!this.res.message) {
-        this.errors = [];
-        this.router.navigate(['/catalog/details/' + data?._id]);
-      } else {
-        this.errors = data;
-      }
-    });
+        if (!this.res.message) {
+          this.errors = [];
+          this.router.navigate(['/catalog/details/' + data?._id]);
+        } else {
+          this.errors = data;
+        }
+      });
   }
 
   async addImageChangeHandler(e: any) {

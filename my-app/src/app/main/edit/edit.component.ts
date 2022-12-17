@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AppComponent } from 'src/app/app.component';
 import { CatalogService } from 'src/app/services/catalog/catalog.service';
 import { DetailsProductService } from 'src/app/services/catalog/details/detailsProduct.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-edit',
@@ -37,10 +38,12 @@ export class EditComponent implements OnInit {
     private route: ActivatedRoute,
     private catalogService: CatalogService,
     private detailsService: DetailsProductService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private vps: ViewportScroller
   ) {}
 
   ngOnInit() {
+    this.vps.scrollToPosition([0, 0]);
     let id = this.route.snapshot.params['id'];
 
     this.detailsService.getProducts(id).subscribe((data: any) => {
@@ -108,7 +111,9 @@ export class EditComponent implements OnInit {
         dataString: base64,
       };
 
-      if (this.allImages.some((x: any) => x.dataString == imageData.dataString)) {
+      if (
+        this.allImages.some((x: any) => x.dataString == imageData.dataString)
+      ) {
         if (this.errors.message !== 'This image already exist!') {
           this.errors.message = 'This image already exist!';
 

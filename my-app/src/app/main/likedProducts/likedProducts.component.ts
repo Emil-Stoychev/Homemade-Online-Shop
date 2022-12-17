@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
@@ -17,10 +18,13 @@ export class LikedProductsComponent implements OnInit {
     private userService: UserService,
     private appComponent: AppComponent,
     private catalogService: CatalogService,
-    private router: Router
+    private router: Router,
+    private vps: ViewportScroller
   ) {}
 
   ngOnInit() {
+    this.vps.scrollToPosition([0, 0]);
+
     this.userService
       .getProfile(this.appComponent.sessionStorage)
       .subscribe((data: any) => {
@@ -28,7 +32,7 @@ export class LikedProductsComponent implements OnInit {
           .getLikedProducts(data._id)
           .subscribe((data: any) => {
             if (data?.message) {
-              this.errors = data
+              this.errors = data;
             } else {
               this.products = data;
             }

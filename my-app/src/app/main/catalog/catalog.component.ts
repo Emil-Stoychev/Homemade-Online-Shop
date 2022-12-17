@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CatalogService } from 'src/app/services/catalog/catalog.service';
@@ -13,7 +14,11 @@ export class CatalogComponent implements OnInit {
   public searchProducts = [] as any;
   public toggleSort: boolean = false;
 
-  constructor(private catalogService: CatalogService, private router: Router) {}
+  constructor(
+    private catalogService: CatalogService,
+    private router: Router,
+    private vps: ViewportScroller
+  ) {}
 
   ngOnInit() {
     this.catalogService
@@ -21,6 +26,8 @@ export class CatalogComponent implements OnInit {
       .subscribe(
         (data) => ((this.products = data), (this.defaultProducts = data))
       );
+
+    this.vps.scrollToPosition([0, 0]);
   }
 
   onSelect(id: string) {

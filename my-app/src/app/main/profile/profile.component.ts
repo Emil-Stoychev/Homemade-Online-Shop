@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
@@ -27,12 +28,18 @@ export class ProfileComponent implements OnInit {
   constructor(
     private router: Router,
     public appComponent: AppComponent,
-    private userService: UserService
+    private userService: UserService,
+    private vps: ViewportScroller
   ) {}
 
   ngOnInit() {
+    this.vps.scrollToPosition([0, 0]);
+
     this.userService
-      .getProfile(this.appComponent.sessionStorage || localStorage.getItem('sessionStorage'))
+      .getProfile(
+        this.appComponent.sessionStorage ||
+          localStorage.getItem('sessionStorage')
+      )
       .subscribe((data) => (this.profile = data));
   }
 
@@ -69,7 +76,8 @@ export class ProfileComponent implements OnInit {
   }
 
   onDeleteHandler($event: any) {
-    let inputText = $event.target.parentElement.parentElement.childNodes[1].value;
+    let inputText =
+      $event.target.parentElement.parentElement.childNodes[1].value;
 
     if (inputText == this.appComponent.userFromToken.email) {
       this.userService
