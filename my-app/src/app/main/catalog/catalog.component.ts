@@ -53,18 +53,20 @@ export class CatalogComponent implements OnInit {
   }
 
   sortBy(word: string) {
-    this.toggleSort = !this.toggleSort;
+    if (this.products?.length > 1) {
+      this.toggleSort = !this.toggleSort;
 
-    this.products = this.products.sort((a: any, b: any) => {
-      if (this.toggleSort) {
-        return word == 'likes'
-          ? a?.[word]?.length - b?.[word]?.length
-          : a?.[word] - b?.[word];
-      } else {
-        return word == 'likes'
-          ? b?.[word]?.length - a?.[word]?.length
-          : b?.[word] - a?.[word];
-      }
-    });
+      this.products = this.products.sort((a: any, b: any) => {
+        if (this.toggleSort) {
+          return word == 'likes'
+            ? a?.[word]?.length - b?.[word]?.length
+            : a?.[word] - b?.[word];
+        } else {
+          return word == 'likes'
+            ? b?.[word]?.length - a?.[word]?.length
+            : b?.[word] - a?.[word];
+        }
+      });
+    }
   }
 }
